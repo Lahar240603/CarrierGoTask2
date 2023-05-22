@@ -1,5 +1,7 @@
 package com.task2.carriergot2.model;
 
+import com.task2.carriergot2.enums.UpdateWorkOrderStateDeciderEnum;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,42 +16,52 @@ public class UpdateWorkOrderStateDecider {
     private String elementName;
 
     @Column(name = "UNASSIGNED", nullable = false)
-    private String unassigned;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum unassigned;
 
 
     @Column(name = "ASSIGNED", nullable = false)
-    private String assigned;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum assigned;
 
 
     @Column(name = "ACCEPTED", nullable = false)
-    private String accepted;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum accepted;
 
     @Column(name = "REJECTED", nullable = false)
-    private String rejected;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum rejected;
 
 
     @Column(name = "CANCELLED", nullable = false)
-    private String cancelled;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum cancelled;
 
 
     @Column(name = "AMEND_BY_O", nullable = false)
-    private String amendByO;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum amendByO;
 
 
     @Column(name = "AMEND_BY_R", nullable = false)
-    private String amendByR;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum amendByR;
 
 
     @Column(name = "ACTIVE", nullable = false)
-    private String active;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum active;
 
 
     @Column(name = "COMPLETED", nullable = false)
-    private String completed;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum completed;
 
 
     @Column(name = "SOURCE_TYPE")
-    private String sourceType;
+    @Enumerated(EnumType.STRING)
+    private UpdateWorkOrderStateDeciderEnum sourceType;
 
 
     @Column(name = "ORGCODE")
@@ -62,7 +74,7 @@ public class UpdateWorkOrderStateDecider {
     public UpdateWorkOrderStateDecider() {
     }
 
-    public UpdateWorkOrderStateDecider(Long dbId, String elementName, String unassigned, String assigned, String accepted, String rejected, String cancelled, String amendByO, String amendByR, String active, String completed, String sourceType, String orgCode) {
+    public UpdateWorkOrderStateDecider(Long dbId, String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, UpdateWorkOrderStateDeciderEnum sourceType, String orgCode) {
         this.dbId = dbId;
         this.elementName = elementName;
         this.unassigned = unassigned;
@@ -94,83 +106,83 @@ public class UpdateWorkOrderStateDecider {
         this.elementName = elementName;
     }
 
-    public String getUnassigned() {
+    public UpdateWorkOrderStateDeciderEnum getUnassigned() {
         return unassigned;
     }
 
-    public void setUnassigned(String unassigned) {
+    public void setUnassigned(UpdateWorkOrderStateDeciderEnum unassigned) {
         this.unassigned = unassigned;
     }
 
-    public String getAssigned() {
+    public UpdateWorkOrderStateDeciderEnum getAssigned() {
         return assigned;
     }
 
-    public void setAssigned(String assigned) {
+    public void setAssigned(UpdateWorkOrderStateDeciderEnum assigned) {
         this.assigned = assigned;
     }
 
-    public String getAccepted() {
+    public UpdateWorkOrderStateDeciderEnum getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(String accepted) {
+    public void setAccepted(UpdateWorkOrderStateDeciderEnum accepted) {
         this.accepted = accepted;
     }
 
-    public String getRejected() {
+    public UpdateWorkOrderStateDeciderEnum getRejected() {
         return rejected;
     }
 
-    public void setRejected(String rejected) {
+    public void setRejected(UpdateWorkOrderStateDeciderEnum rejected) {
         this.rejected = rejected;
     }
 
-    public String getCancelled() {
+    public UpdateWorkOrderStateDeciderEnum getCancelled() {
         return cancelled;
     }
 
-    public void setCancelled(String cancelled) {
+    public void setCancelled(UpdateWorkOrderStateDeciderEnum cancelled) {
         this.cancelled = cancelled;
     }
 
-    public String getAmendByO() {
+    public UpdateWorkOrderStateDeciderEnum getAmendByO() {
         return amendByO;
     }
 
-    public void setAmendByO(String amendByO) {
+    public void setAmendByO(UpdateWorkOrderStateDeciderEnum amendByO) {
         this.amendByO = amendByO;
     }
 
-    public String getAmendByR() {
+    public UpdateWorkOrderStateDeciderEnum getAmendByR() {
         return amendByR;
     }
 
-    public void setAmendByR(String amendByR) {
+    public void setAmendByR(UpdateWorkOrderStateDeciderEnum amendByR) {
         this.amendByR = amendByR;
     }
 
-    public String getActive() {
+    public UpdateWorkOrderStateDeciderEnum getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(UpdateWorkOrderStateDeciderEnum active) {
         this.active = active;
     }
 
-    public String getCompleted() {
+    public UpdateWorkOrderStateDeciderEnum getCompleted() {
         return completed;
     }
 
-    public void setCompleted(String completed) {
+    public void setCompleted(UpdateWorkOrderStateDeciderEnum completed) {
         this.completed = completed;
     }
 
-    public String getSourceType() {
+    public UpdateWorkOrderStateDeciderEnum getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(String sourceType) {
+    public void setSourceType(UpdateWorkOrderStateDeciderEnum sourceType) {
         this.sourceType = sourceType;
     }
 

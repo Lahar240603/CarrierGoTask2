@@ -1,5 +1,7 @@
 package com.task2.carriergot2.model;
 
+import com.task2.carriergot2.enums.AmendWorkOrderStateDeciderEnum;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,27 +16,37 @@ public class AmendWorkOrderStateDecider {
     private String elementName;
 
     @Column(name = "UNASSIGNED", nullable = false)
-    private String unassigned;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum unassigned;
     @Column(name = "ASSIGNED", nullable = false)
-    private String assigned;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum assigned;
 
     @Column(name = "ACCEPTED", nullable = false)
-    private String accepted;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum accepted;
     @Column(name = "REJECTED", nullable = false)
-    private String rejected;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum rejected;
     @Column(name = "CANCELLED", nullable = false)
-    private String cancelled;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum cancelled;
     @Column(name = "AMEND_BY_O", nullable = false)
-    private String amendByO;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum amendByO;
     @Column(name = "AMEND_BY_R", nullable = false)
-    private String amendByR;
-    @Column(name = "ACTIVE", nullable = false, length = 4000)
-    private String active;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum amendByR;
+    @Column(name = "ACTIVE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum active;
 
     @Column(name = "COMPLETED", nullable = false)
-    private String completed;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum completed;
     @Column(name = "SOURCE_TYPE")
-    private String sourceType;
+    @Enumerated(EnumType.STRING)
+    private AmendWorkOrderStateDeciderEnum sourceType;
     @Column(name = "ORGCODE")
     private String orgCode;
     // Constructors, getters, and setters
@@ -42,7 +54,7 @@ public class AmendWorkOrderStateDecider {
     public AmendWorkOrderStateDecider() {
     }
 
-    public AmendWorkOrderStateDecider(int dbId, String elementName, String unassigned, String assigned, String accepted, String rejected, String cancelled, String amendByO, String amendByR, String active, String completed, String sourceType, String orgCode) {
+    public AmendWorkOrderStateDecider(int dbId, String elementName, AmendWorkOrderStateDeciderEnum unassigned, AmendWorkOrderStateDeciderEnum assigned, AmendWorkOrderStateDeciderEnum accepted, AmendWorkOrderStateDeciderEnum rejected, AmendWorkOrderStateDeciderEnum cancelled, AmendWorkOrderStateDeciderEnum amendByO, AmendWorkOrderStateDeciderEnum amendByR, AmendWorkOrderStateDeciderEnum active, AmendWorkOrderStateDeciderEnum completed, AmendWorkOrderStateDeciderEnum sourceType, String orgCode) {
         this.dbId = dbId;
         this.elementName = elementName;
         this.unassigned = unassigned;
@@ -74,83 +86,83 @@ public class AmendWorkOrderStateDecider {
         this.elementName = elementName;
     }
 
-    public String getUnassigned() {
+    public AmendWorkOrderStateDeciderEnum getUnassigned() {
         return unassigned;
     }
 
-    public void setUnassigned(String unassigned) {
+    public void setUnassigned(AmendWorkOrderStateDeciderEnum unassigned) {
         this.unassigned = unassigned;
     }
 
-    public String getAssigned() {
+    public AmendWorkOrderStateDeciderEnum getAssigned() {
         return assigned;
     }
 
-    public void setAssigned(String assigned) {
+    public void setAssigned(AmendWorkOrderStateDeciderEnum assigned) {
         this.assigned = assigned;
     }
 
-    public String getAccepted() {
+    public AmendWorkOrderStateDeciderEnum getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(String accepted) {
+    public void setAccepted(AmendWorkOrderStateDeciderEnum accepted) {
         this.accepted = accepted;
     }
 
-    public String getRejected() {
+    public AmendWorkOrderStateDeciderEnum getRejected() {
         return rejected;
     }
 
-    public void setRejected(String rejected) {
+    public void setRejected(AmendWorkOrderStateDeciderEnum rejected) {
         this.rejected = rejected;
     }
 
-    public String getCancelled() {
+    public AmendWorkOrderStateDeciderEnum getCancelled() {
         return cancelled;
     }
 
-    public void setCancelled(String cancelled) {
+    public void setCancelled(AmendWorkOrderStateDeciderEnum cancelled) {
         this.cancelled = cancelled;
     }
 
-    public String getAmendByO() {
+    public AmendWorkOrderStateDeciderEnum getAmendByO() {
         return amendByO;
     }
 
-    public void setAmendByO(String amendByO) {
+    public void setAmendByO(AmendWorkOrderStateDeciderEnum amendByO) {
         this.amendByO = amendByO;
     }
 
-    public String getAmendByR() {
+    public AmendWorkOrderStateDeciderEnum getAmendByR() {
         return amendByR;
     }
 
-    public void setAmendByR(String amendByR) {
+    public void setAmendByR(AmendWorkOrderStateDeciderEnum amendByR) {
         this.amendByR = amendByR;
     }
 
-    public String getActive() {
+    public AmendWorkOrderStateDeciderEnum getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(AmendWorkOrderStateDeciderEnum active) {
         this.active = active;
     }
 
-    public String getCompleted() {
+    public AmendWorkOrderStateDeciderEnum getCompleted() {
         return completed;
     }
 
-    public void setCompleted(String completed) {
+    public void setCompleted(AmendWorkOrderStateDeciderEnum completed) {
         this.completed = completed;
     }
 
-    public String getSourceType() {
+    public AmendWorkOrderStateDeciderEnum getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(String sourceType) {
+    public void setSourceType(AmendWorkOrderStateDeciderEnum sourceType) {
         this.sourceType = sourceType;
     }
 
