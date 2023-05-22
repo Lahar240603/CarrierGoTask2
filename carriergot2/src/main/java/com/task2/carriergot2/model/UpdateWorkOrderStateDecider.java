@@ -69,10 +69,7 @@ public class UpdateWorkOrderStateDecider {
 
 
     // Constructors, getters, and setters
-
-
-    public UpdateWorkOrderStateDecider() {
-    }
+    protected UpdateWorkOrderStateDecider() {}
 
     public UpdateWorkOrderStateDecider(Long dbId, String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, UpdateWorkOrderStateDeciderEnum sourceType, String orgCode) {
         this.dbId = dbId;
