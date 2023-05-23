@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "updateworkorderstatedecider")
-public class UpdateWorkOrderStateDecider {
+public class UpdateWorkOrderStateDecider implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DBID")
@@ -69,10 +69,9 @@ public class UpdateWorkOrderStateDecider {
 
 
     // Constructors, getters, and setters
-    protected UpdateWorkOrderStateDecider() {}
+    public UpdateWorkOrderStateDecider() {}
 
-    public UpdateWorkOrderStateDecider(Long dbId, String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
-        this.dbId = dbId;
+    public UpdateWorkOrderStateDecider(String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
         this.elementName = elementName;
         this.unassigned = unassigned;
         this.assigned = assigned;
@@ -230,6 +229,22 @@ public class UpdateWorkOrderStateDecider {
         }
 //        if (newObject.getOrgCode() != null) {
 //            this.orgCode = newObject.getOrgCode();
-//        }
+        }
+
+    public UpdateWorkOrderStateDecider getCloneUpdate(String newOrgCode) {
+        UpdateWorkOrderStateDecider newObject = new UpdateWorkOrderStateDecider();
+        newObject.setAccepted(this.accepted);
+        newObject.setActive(this.active);
+        newObject.setAssigned(this.assigned);
+        newObject.setAmendByO(this.amendByO);
+        newObject.setAmendByR(this.amendByR);
+        newObject.setCancelled(this.cancelled);
+        newObject.setCompleted(this.completed);
+        newObject.setElementName(this.elementName);
+        newObject.setRejected(this.rejected);
+        newObject.setSourceType(this.sourceType);
+        newObject.setUnassigned(this.unassigned);
+        newObject.setOrgCode(newOrgCode);
+        return newObject;
     }
 }

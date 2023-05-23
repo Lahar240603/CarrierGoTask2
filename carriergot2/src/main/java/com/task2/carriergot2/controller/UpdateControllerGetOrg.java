@@ -13,10 +13,12 @@ import java.util.List;
 @RequestMapping("/update")
 public class UpdateControllerGetOrg {
     @Autowired
-    private iUpdateServiceGetOrg updateService;
+    private iUpdateServiceGetOrg updateServiceClone;
 
     @GetMapping("/{orgCode}")
     public List<UpdateWorkOrderStateDecider> getUpdateByOrgCode(@PathVariable("orgCode") String orgCode ){
-        return updateService.findByOrgCode(orgCode);
+        return updateServiceClone.findByOrgCode(orgCode);
     }
+
+
 }
