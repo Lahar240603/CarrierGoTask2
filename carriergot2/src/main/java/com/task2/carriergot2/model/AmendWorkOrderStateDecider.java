@@ -11,7 +11,7 @@ public class AmendWorkOrderStateDecider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DBID")
-    private int dbId;
+    private Long dbId;
 
     @Column(name = "ELEMENT_NAME", nullable = false)
     private String elementName;
@@ -62,27 +62,27 @@ public class AmendWorkOrderStateDecider {
 
     protected AmendWorkOrderStateDecider() {}
 
-    public AmendWorkOrderStateDecider(int dbId, String elementName, String unassigned, String assigned, String accepted, String rejected, String cancelled, String amendByO, String amendByR, String active, String completed, String sourceType, String orgCode) {
+    public AmendWorkOrderStateDecider(Long dbId, String elementName, AmendWorkOrderStateDeciderEnum unassigned, AmendWorkOrderStateDeciderEnum assigned, AmendWorkOrderStateDeciderEnum accepted, AmendWorkOrderStateDeciderEnum rejected, AmendWorkOrderStateDeciderEnum cancelled, AmendWorkOrderStateDeciderEnum amendByO, AmendWorkOrderStateDeciderEnum amendByR, AmendWorkOrderStateDeciderEnum active, AmendWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
         this.dbId = dbId;
         this.elementName = elementName;
-        this.unassigned = AmendWorkOrderStateDeciderEnum.getEnum(unassigned);
-        this.assigned = AmendWorkOrderStateDeciderEnum.getEnum(assigned);
-        this.accepted = AmendWorkOrderStateDeciderEnum.getEnum(accepted);
-        this.rejected = AmendWorkOrderStateDeciderEnum.getEnum(rejected);
-        this.cancelled = AmendWorkOrderStateDeciderEnum.getEnum(cancelled);
-        this.amendByO = AmendWorkOrderStateDeciderEnum.getEnum(amendByO);
-        this.amendByR = AmendWorkOrderStateDeciderEnum.getEnum(amendByR);
-        this.active = AmendWorkOrderStateDeciderEnum.getEnum(active);
-        this.completed = AmendWorkOrderStateDeciderEnum.getEnum(completed);
+        this.unassigned = unassigned;
+        this.assigned = assigned;
+        this.accepted = accepted;
+        this.rejected = rejected;
+        this.cancelled = cancelled;
+        this.amendByO = amendByO;
+        this.amendByR = amendByR;
+        this.active = active;
+        this.completed = completed;
         this.sourceType = sourceType;
         this.orgCode = orgCode;
     }
 
-    public int getDbId() {
+    public Long getDbId() {
         return dbId;
     }
 
-    public void setDbId(int dbId) {
+    public void setDbId(Long dbId) {
         this.dbId = dbId;
     }
 
