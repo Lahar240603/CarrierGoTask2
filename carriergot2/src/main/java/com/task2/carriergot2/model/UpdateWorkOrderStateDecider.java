@@ -1,6 +1,7 @@
 package com.task2.carriergot2.model;
 
 import com.task2.carriergot2.enums.UpdateWorkOrderStateDeciderEnum;
+import com.task2.carriergot2.enums.converter.UpdateWorkOrderStateDeciderEnumConverter;
 
 import javax.persistence.*;
 
@@ -16,52 +17,51 @@ public class UpdateWorkOrderStateDecider {
     private String elementName;
 
     @Column(name = "UNASSIGNED", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum unassigned;
 
 
     @Column(name = "ASSIGNED", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum assigned;
 
 
     @Column(name = "ACCEPTED", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum accepted;
 
     @Column(name = "REJECTED", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum rejected;
 
 
     @Column(name = "CANCELLED", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum cancelled;
 
 
     @Column(name = "AMEND_BY_O", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum amendByO;
 
 
     @Column(name = "AMEND_BY_R", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum amendByR;
 
 
     @Column(name = "ACTIVE", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum active;
 
 
     @Column(name = "COMPLETED", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UpdateWorkOrderStateDeciderEnumConverter.class)
     private UpdateWorkOrderStateDeciderEnum completed;
 
 
     @Column(name = "SOURCE_TYPE")
-    @Enumerated(EnumType.STRING)
-    private UpdateWorkOrderStateDeciderEnum sourceType;
+    private String sourceType;
 
 
     @Column(name = "ORGCODE")
@@ -71,7 +71,7 @@ public class UpdateWorkOrderStateDecider {
     // Constructors, getters, and setters
     protected UpdateWorkOrderStateDecider() {}
 
-    public UpdateWorkOrderStateDecider(Long dbId, String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, UpdateWorkOrderStateDeciderEnum sourceType, String orgCode) {
+    public UpdateWorkOrderStateDecider(Long dbId, String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
         this.dbId = dbId;
         this.elementName = elementName;
         this.unassigned = unassigned;
@@ -175,11 +175,11 @@ public class UpdateWorkOrderStateDecider {
         this.completed = completed;
     }
 
-    public UpdateWorkOrderStateDeciderEnum getSourceType() {
+    public String getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(UpdateWorkOrderStateDeciderEnum sourceType) {
+    public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
     }
 
