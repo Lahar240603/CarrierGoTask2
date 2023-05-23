@@ -5,12 +5,12 @@ import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 
 import java.util.List;
 
-public class WorkOrderStateDeciderUpdateRequest {
+public class WorkOrderStateDeciderRequest {
     private List<AmendWorkOrderStateDecider> amendList;
 
     private List<UpdateWorkOrderStateDecider> updateList;
 
-    public WorkOrderStateDeciderUpdateRequest(List<AmendWorkOrderStateDecider> amendList, List<UpdateWorkOrderStateDecider> updateList) {
+    public WorkOrderStateDeciderRequest(List<AmendWorkOrderStateDecider> amendList, List<UpdateWorkOrderStateDecider> updateList) {
         this.updateList = updateList;
         this.amendList = amendList;
     }

@@ -1,8 +1,7 @@
 package com.task2.carriergot2.controller;
 
-import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderModifyService;
-import com.task2.carriergot2.utils.WorkOrderStateDeciderUpdateRequest;
+import com.task2.carriergot2.utils.WorkOrderStateDeciderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,7 @@ public class ModifyController {
     private iWorkOrderStateDeciderModifyService service;
 
     @PutMapping("/update")
-    public WorkOrderStateDeciderUpdateRequest updateRequest(@RequestBody WorkOrderStateDeciderUpdateRequest request) {
+    public WorkOrderStateDeciderRequest updateRequest(@RequestBody WorkOrderStateDeciderRequest request) {
         return service.updateRequest(request);
     }
 }
