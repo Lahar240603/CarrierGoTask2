@@ -1,5 +1,9 @@
 package com.task2.carriergot2.service;
 
-public interface iUpdateWorkOrderStateDeciderModifyService {
+import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 
+import java.util.List;
+
+public interface iUpdateWorkOrderStateDeciderModifyService {
+    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState);
 }

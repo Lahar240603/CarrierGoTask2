@@ -10,4 +10,5 @@ import java.util.List;
 public interface AmendRepository extends JpaRepository<AmendWorkOrderStateDecider, Long> {
     public List<AmendWorkOrderStateDecider> findAllByOrgCode(String orgCode);
 
+    public AmendWorkOrderStateDecider findByDbId(Long dbId);
 }
