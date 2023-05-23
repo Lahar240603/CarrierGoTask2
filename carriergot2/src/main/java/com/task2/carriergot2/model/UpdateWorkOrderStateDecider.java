@@ -190,4 +190,46 @@ public class UpdateWorkOrderStateDecider {
     public void setOrgCode(String orgCode) {
         this.orgCode = orgCode;
     }
+
+    public void updateUpdateWorkOrderStateDecider(UpdateWorkOrderStateDecider newObject) {
+//        if (newObject.getDbId() != null) {
+//            this.dbId = newObject.getDbId();
+//        }
+//        if (newObject.getElementName() != null) {
+//            this.elementName = newObject.getElementName();
+//        }
+        if (newObject.getUnassigned() != null) {
+            this.unassigned = newObject.getUnassigned();
+        }
+        if (newObject.getAssigned() != null) {
+            this.assigned = newObject.getAssigned();
+        }
+        if (newObject.getAccepted() != null) {
+            this.accepted = newObject.getAccepted();
+        }
+        if (newObject.getRejected() != null) {
+            this.rejected = newObject.getRejected();
+        }
+        if (newObject.getCancelled() != null) {
+            this.cancelled = newObject.getCancelled();
+        }
+        if (newObject.getAmendByO() != null) {
+            this.amendByO = newObject.getAmendByO();
+        }
+        if (newObject.getAmendByR() != null) {
+            this.amendByR = newObject.getAmendByR();
+        }
+        if (newObject.getActive() != null) {
+            this.active = newObject.getActive();
+        }
+        if (newObject.getCompleted() != null) {
+            this.completed = newObject.getCompleted();
+        }
+        if (newObject.getSourceType() != null) {
+            this.sourceType = newObject.getSourceType();
+        }
+//        if (newObject.getOrgCode() != null) {
+//            this.orgCode = newObject.getOrgCode();
+//        }
+    }
 }

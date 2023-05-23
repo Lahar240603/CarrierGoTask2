@@ -19,6 +19,10 @@ public class AmendWorkOrderStateDeciderEnumConverter implements AttributeConvert
 
     @Override
     public AmendWorkOrderStateDeciderEnum convertToEntityAttribute(String dbData) {
+        if(dbData == null) {
+            return null;
+//            TODO: Raise Exception.
+        }
         switch (dbData) {
             case "O": return AmendWorkOrderStateDeciderEnum.O;
             case "O/R" : return AmendWorkOrderStateDeciderEnum.OR;
