@@ -62,8 +62,7 @@ public class AmendWorkOrderStateDecider {
 
     protected AmendWorkOrderStateDecider() {}
 
-    public AmendWorkOrderStateDecider(Long dbId, String elementName, AmendWorkOrderStateDeciderEnum unassigned, AmendWorkOrderStateDeciderEnum assigned, AmendWorkOrderStateDeciderEnum accepted, AmendWorkOrderStateDeciderEnum rejected, AmendWorkOrderStateDeciderEnum cancelled, AmendWorkOrderStateDeciderEnum amendByO, AmendWorkOrderStateDeciderEnum amendByR, AmendWorkOrderStateDeciderEnum active, AmendWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
-        this.dbId = dbId;
+    public AmendWorkOrderStateDecider(String elementName, AmendWorkOrderStateDeciderEnum unassigned, AmendWorkOrderStateDeciderEnum assigned, AmendWorkOrderStateDeciderEnum accepted, AmendWorkOrderStateDeciderEnum rejected, AmendWorkOrderStateDeciderEnum cancelled, AmendWorkOrderStateDeciderEnum amendByO, AmendWorkOrderStateDeciderEnum amendByR, AmendWorkOrderStateDeciderEnum active, AmendWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
         this.elementName = elementName;
         this.unassigned = unassigned;
         this.assigned = assigned;
@@ -222,5 +221,22 @@ public class AmendWorkOrderStateDecider {
 //        if (newObject.getOrgCode() != null) {
 //            this.orgCode = newObject.getOrgCode();
 //        }
+    }
+
+    public AmendWorkOrderStateDecider getCloneAmend(String newOrgCode) {
+        AmendWorkOrderStateDecider newObject = new AmendWorkOrderStateDecider();
+        newObject.setAccepted(this.accepted);
+        newObject.setActive(this.active);
+        newObject.setAssigned(this.assigned);
+        newObject.setAmendByO(this.amendByO);
+        newObject.setAmendByR(this.amendByR);
+        newObject.setCancelled(this.cancelled);
+        newObject.setCompleted(this.completed);
+        newObject.setElementName(this.elementName);
+        newObject.setRejected(this.rejected);
+        newObject.setSourceType(this.sourceType);
+        newObject.setUnassigned(this.unassigned);
+        newObject.setOrgCode(newOrgCode);
+        return newObject;
     }
 }
