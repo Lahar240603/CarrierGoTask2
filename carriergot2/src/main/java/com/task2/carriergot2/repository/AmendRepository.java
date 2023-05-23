@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AmendRepository extends JpaRepository<AmendWorkOrderStateDecider, Long> {
     public List<AmendWorkOrderStateDecider> findAllByOrgCode(String orgCode);
 
-    public AmendWorkOrderStateDecider findByDbId(Long dbId);
+    public Optional<AmendWorkOrderStateDecider> findByDbId(Long dbId);
 }
