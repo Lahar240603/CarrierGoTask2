@@ -7,4 +7,6 @@ import java.util.List;
 public interface iAmendServiceGetOrg {
 
     public List<AmendWorkOrderStateDecider> findByOrgCode(String orgCode);
+
+    List<String> findAllOrgCodes();
 }
