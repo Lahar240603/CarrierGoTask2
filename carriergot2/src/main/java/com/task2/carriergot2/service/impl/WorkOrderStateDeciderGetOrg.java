@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -22,6 +21,7 @@ public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg
     @Autowired
     private iUpdateServiceGetOrg updatedService;
 
+
     @Override
 //    @Transactional
     public WorkOrderStateDeciderRequest getOrgRequest(String getOrg){
@@ -31,6 +31,10 @@ public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg
         return new WorkOrderStateDeciderRequest(amendedByOrgCode , updatedByOrgCode);
     }
 
+    @Override
+    public List<String> findAllOrgCodes() {
+        return amendedService.findAllOrgCodes();
+    }
 
 
 }

@@ -18,4 +18,11 @@ public class AmendServiceGetOrgImpl implements iAmendServiceGetOrg {
     public List<AmendWorkOrderStateDecider> findByOrgCode(String orgCode) {
         return amendRepository.findAllByOrgCode(orgCode);
     }
+
+    @Override
+    public List<String> findAllOrgCodes() {
+        return amendRepository.findDistinctOrgCode();
+    }
+
+
 }

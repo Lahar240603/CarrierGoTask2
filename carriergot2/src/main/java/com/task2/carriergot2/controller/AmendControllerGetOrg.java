@@ -23,7 +23,6 @@ public class AmendControllerGetOrg {
         return amendService.findByOrgCode(orgCode);
     }
 
-
 }
 
 
