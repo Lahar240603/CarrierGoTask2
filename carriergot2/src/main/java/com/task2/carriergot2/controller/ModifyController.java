@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/workorderstate")
 public class ModifyController {
 
     @Autowired
     private iWorkOrderStateDeciderModifyService service;
 
-    @PutMapping("/update")
-    public WorkOrderStateDeciderRequest updateRequest(@RequestBody WorkOrderStateDeciderRequest request) {
-        return service.updateRequest(request);
+    @PutMapping("/update/{orgCode}")
+    public WorkOrderStateDeciderRequest updateRequest(@RequestBody WorkOrderStateDeciderRequest request, @PathVariable("orgCode") String orgCode) {
+        return service.updateRequest(request, orgCode);
     }
 }

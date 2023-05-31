@@ -18,7 +18,7 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
     private UpdateRepository repository;
 
     @Override
-    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState) {
+    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState, String orgCode) {
         List<UpdateWorkOrderStateDecider> updatedList = new ArrayList<UpdateWorkOrderStateDecider>();
         for(UpdateWorkOrderStateDecider u : updatedState) {
             if(u.getDbId() == null) {
@@ -29,6 +29,6 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
             repository.save(tempState);
             updatedList.add(tempState);
         }
-        return updatedList;
+        return repository.findAllByOrgCode(orgCode);
     }
 }

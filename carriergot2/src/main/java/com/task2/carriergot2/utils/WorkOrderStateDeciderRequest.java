@@ -10,6 +10,9 @@ public class WorkOrderStateDeciderRequest {
 
     private List<UpdateWorkOrderStateDecider> updateList;
 
+    protected WorkOrderStateDeciderRequest() {
+    }
+
     public WorkOrderStateDeciderRequest(List<AmendWorkOrderStateDecider> amendList, List<UpdateWorkOrderStateDecider> updateList) {
         this.updateList = updateList;
         this.amendList = amendList;

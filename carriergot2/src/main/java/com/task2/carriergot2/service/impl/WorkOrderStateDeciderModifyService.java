@@ -22,11 +22,11 @@ public class WorkOrderStateDeciderModifyService implements iWorkOrderStateDecide
 
     @Override
     @Transactional
-    public WorkOrderStateDeciderRequest updateRequest(WorkOrderStateDeciderRequest request) {
+    public WorkOrderStateDeciderRequest updateRequest(WorkOrderStateDeciderRequest request, String orgCode) {
 //        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
-        List<UpdateWorkOrderStateDecider> updatedUpdateState = updateService.updateUpdatedecider(request.getUpdateList());
+        List<UpdateWorkOrderStateDecider> updatedUpdateState = updateService.updateUpdatedecider(request.getUpdateList() , orgCode);
 
-        List<AmendWorkOrderStateDecider> updatedAmendState = amendService.updateAmendState(request.getAmendList());
+        List<AmendWorkOrderStateDecider> updatedAmendState = amendService.updateAmendState(request.getAmendList(), orgCode);
 
         return new WorkOrderStateDeciderRequest(updatedAmendState , updatedUpdateState);
     }

@@ -18,7 +18,7 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
     AmendRepository repository;
     
     @Override
-    public List<AmendWorkOrderStateDecider> updateAmendState(List<AmendWorkOrderStateDecider> updatedState) {
+    public List<AmendWorkOrderStateDecider> updateAmendState(List<AmendWorkOrderStateDecider> updatedState, String orgCode) {
         List<AmendWorkOrderStateDecider> updatedList = new ArrayList<AmendWorkOrderStateDecider>();
         for(AmendWorkOrderStateDecider u : updatedState) {
             if(u.getDbId() == null) {
@@ -30,6 +30,6 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
             updatedList.add(tempState);
         }
 
-        return updatedList;
+        return repository.findAllByOrgCode(orgCode);
     }
 }

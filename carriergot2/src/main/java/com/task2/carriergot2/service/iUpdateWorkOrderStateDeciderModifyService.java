@@ -5,5 +5,5 @@ import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 import java.util.List;
 
 public interface iUpdateWorkOrderStateDeciderModifyService {
-    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState);
+    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState, String orgCode);
 }
