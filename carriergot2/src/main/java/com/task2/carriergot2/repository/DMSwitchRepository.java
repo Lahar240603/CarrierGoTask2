@@ -1,9 +1,7 @@
-package com.example.demo3.repository;
+package com.task2.carriergot2.repository;
 
+import com.task2.carriergot2.model.DMSwitches;
 import org.springframework.data.repository.CrudRepository;
-
-
-import com.example.demo3.entity.DMSwitches;
 
 public interface DMSwitchRepository extends CrudRepository<DMSwitches, String> {
 

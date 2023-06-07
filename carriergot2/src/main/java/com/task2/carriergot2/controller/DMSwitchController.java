@@ -100,10 +100,12 @@ public ResponseEntity<DMSwitches> addOrUpdate(@PathVariable("name") String dmswi
 
 }*/
 
-package com.example.demo3.controller;
+package com.task2.carriergot2.controller;
 
 import java.util.List;
 
+import com.task2.carriergot2.model.DMSwitches;
+import com.task2.carriergot2.service.DMSwitchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -116,10 +118,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo3.entity.DMSwitches;
-import com.example.demo3.service.DMSwitchService;
-import com.example.demo3.repository.DMSwitchRepository;
 
 @RestController
 @CrossOrigin("http://localhost:3000")

@@ -1,13 +1,12 @@
-package com.example.demo3.service;
+package com.task2.carriergot2.service;
 
 import java.util.List;
 import java.util.Optional;
 
+import com.task2.carriergot2.model.DMSwitches;
+import com.task2.carriergot2.repository.DMSwitchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo3.entity.DMSwitches;
-import com.example.demo3.repository.DMSwitchRepository;
 
 @Service
 public class DMSwitchService {

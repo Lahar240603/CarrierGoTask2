@@ -51,7 +51,7 @@ public class DMSwitches {
 		return "DMSwitches [switchName=" + switchName + ", isEnabled=" + isEnabled + "]";
 	}
 }*/
-package com.example.demo3.entity;
+package com.task2.carriergot2.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
