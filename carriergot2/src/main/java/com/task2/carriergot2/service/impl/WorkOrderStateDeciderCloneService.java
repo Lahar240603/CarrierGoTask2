@@ -26,9 +26,9 @@ public class WorkOrderStateDeciderCloneService implements iWorkOrderStateDecider
 
     @Override
     @Transactional
-    public WorkOrderStateDeciderRequest cloneRequest(String sourceOrgCode, String newOrgCode) {
-        List<UpdateWorkOrderStateDecider> t = updateService.cloneByOrgCodeUpdate(sourceOrgCode, newOrgCode);
-        List<AmendWorkOrderStateDecider> t1 = amendService.cloneByOrgCodeAmend(sourceOrgCode, newOrgCode);
+    public WorkOrderStateDeciderRequest cloneRequest(String sourceOrgCode, String newOrgCode, String username) {
+        List<UpdateWorkOrderStateDecider> t = updateService.cloneByOrgCodeUpdate(sourceOrgCode, newOrgCode, username);
+        List<AmendWorkOrderStateDecider> t1 = amendService.cloneByOrgCodeAmend(sourceOrgCode, newOrgCode, username);
 
         return new WorkOrderStateDeciderRequest(t1 , t);
     }

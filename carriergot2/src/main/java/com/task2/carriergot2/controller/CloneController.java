@@ -19,7 +19,7 @@ public class CloneController {
     private iWorkOrderStateDeciderCloneService service;
 
     @PutMapping("/{sourceOrgCode}/{newOrgCode}")
-    public WorkOrderStateDeciderRequest cloneRequest(@PathVariable("sourceOrgCode") String sourceOrgCode, @PathVariable("newOrgCode") String newOrgCode) {
-        return service.cloneRequest(sourceOrgCode, newOrgCode);
+    public WorkOrderStateDeciderRequest cloneRequest(@PathVariable("sourceOrgCode") String sourceOrgCode, @PathVariable("newOrgCode") String newOrgCode, @RequestAttribute("username") String username) {
+        return service.cloneRequest(sourceOrgCode, newOrgCode, username);
     }
 }

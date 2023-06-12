@@ -16,11 +16,11 @@ public class UpdateServiceImplClone implements UpdateServiceClone {
     private UpdateRepository updateRepository;
 
     @Override
-    public List<UpdateWorkOrderStateDecider> cloneByOrgCodeUpdate(String sourceOrgCode, String newOrgCode) {
+    public List<UpdateWorkOrderStateDecider> cloneByOrgCodeUpdate(String sourceOrgCode, String newOrgCode, String username) {
         List<UpdateWorkOrderStateDecider> t = updateRepository.findAllByOrgCode(sourceOrgCode);
         List<UpdateWorkOrderStateDecider> fin = new ArrayList<UpdateWorkOrderStateDecider>();
         for(UpdateWorkOrderStateDecider i : t) {
-            UpdateWorkOrderStateDecider tempObject =  i.getCloneUpdate(newOrgCode);
+            UpdateWorkOrderStateDecider tempObject =  i.getCloneUpdate(newOrgCode, username);
             fin.add(tempObject);
         }
         return updateRepository.saveAllAndFlush(fin);

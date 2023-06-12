@@ -2,8 +2,10 @@ package com.task2.carriergot2.model;
 
 import com.task2.carriergot2.enums.AmendWorkOrderStateDeciderEnum;
 import com.task2.carriergot2.enums.converter.AmendWorkOrderStateDeciderEnumConverter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "amendworkorderstatedecider")
@@ -16,53 +18,67 @@ public class AmendWorkOrderStateDecider {
     @Column(name = "ELEMENT_NAME", nullable = false)
     private String elementName;
 
-    @Column(name = "UNASSIGNED", nullable = false)
-    
+    @Column(name = "UNASSIGNED", nullable = false, length = 3)
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum unassigned;
-    @Column(name = "ASSIGNED", nullable = false)
+    @Column(name = "ASSIGNED", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum assigned;
 
-    @Column(name = "ACCEPTED", nullable = false)
+    @Column(name = "ACCEPTED", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum accepted;
-    @Column(name = "REJECTED", nullable = false)
+    @Column(name = "REJECTED", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum rejected;
-    @Column(name = "CANCELLED", nullable = false)
+    @Column(name = "CANCELLED", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum cancelled;
-    @Column(name = "AMEND_BY_O", nullable = false)
+    @Column(name = "AMEND_BY_O", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum amendByO;
-    @Column(name = "AMEND_BY_R", nullable = false)
+    @Column(name = "AMEND_BY_R", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum amendByR;
-    @Column(name = "ACTIVE", nullable = false)
+    @Column(name = "ACTIVE", nullable = false, length = 3)
     
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum active;
 
-    @Column(name = "COMPLETED", nullable = false)
-    
+    @Column(name = "COMPLETED", nullable = false, length = 3)
     @Convert(converter = AmendWorkOrderStateDeciderEnumConverter.class)
     private AmendWorkOrderStateDeciderEnum completed;
     @Column(name = "SOURCE_TYPE")
     private String sourceType;
     @Column(name = "ORGCODE")
     private String orgCode;
+
+    @Column(name = "CREATED_BY")
+    private String createdBy;
+
+    @Column(name = "CREATED_DATE_TIME")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime createdDateTime;
+
+    @Column(name = "UPDATED_BY")
+    private String updatedBy;
+
+    @Column(name = "UPDATED_DATE_TIME")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime updatedDateTime;
     // Constructors, getters, and setters
 
-    protected AmendWorkOrderStateDecider() {}
+    protected AmendWorkOrderStateDecider() {
+        this.createdDateTime = LocalDateTime.now();
+    }
 
-    public AmendWorkOrderStateDecider(String elementName, AmendWorkOrderStateDeciderEnum unassigned, AmendWorkOrderStateDeciderEnum assigned, AmendWorkOrderStateDeciderEnum accepted, AmendWorkOrderStateDeciderEnum rejected, AmendWorkOrderStateDeciderEnum cancelled, AmendWorkOrderStateDeciderEnum amendByO, AmendWorkOrderStateDeciderEnum amendByR, AmendWorkOrderStateDeciderEnum active, AmendWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
+    public AmendWorkOrderStateDecider(String elementName, AmendWorkOrderStateDeciderEnum unassigned, AmendWorkOrderStateDeciderEnum assigned, AmendWorkOrderStateDeciderEnum accepted, AmendWorkOrderStateDeciderEnum rejected, AmendWorkOrderStateDeciderEnum cancelled, AmendWorkOrderStateDeciderEnum amendByO, AmendWorkOrderStateDeciderEnum amendByR, AmendWorkOrderStateDeciderEnum active, AmendWorkOrderStateDeciderEnum completed, String sourceType, String orgCode, String createdBy){
         this.elementName = elementName;
         this.unassigned = unassigned;
         this.assigned = assigned;
@@ -75,6 +91,8 @@ public class AmendWorkOrderStateDecider {
         this.completed = completed;
         this.sourceType = sourceType;
         this.orgCode = orgCode;
+        this.createdBy = createdBy;
+        this.createdDateTime = LocalDateTime.now();
     }
 
     public Long getDbId() {
@@ -181,13 +199,39 @@ public class AmendWorkOrderStateDecider {
         this.orgCode = orgCode;
     }
 
-    public void updateAmendWorkOrderStateDecider(AmendWorkOrderStateDecider newObject) {
-//        if (newObject.getDbId() != null) {
-//            this.dbId = newObject.getDbId();
-//        }
-//        if (newObject.getElementName() != null) {
-//            this.elementName = newObject.getElementName();
-//        }
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime() {
+        this.createdDateTime = LocalDateTime.now();
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime() {
+        this.updatedDateTime = LocalDateTime.now();
+    }
+
+    public void updateAmendWorkOrderStateDecider(AmendWorkOrderStateDecider newObject, String updatedBy) {
         if (newObject.getUnassigned() != null) {
             this.unassigned = newObject.getUnassigned();
         }
@@ -218,12 +262,11 @@ public class AmendWorkOrderStateDecider {
         if (newObject.getSourceType() != null) {
             this.sourceType = newObject.getSourceType();
         }
-//        if (newObject.getOrgCode() != null) {
-//            this.orgCode = newObject.getOrgCode();
-//        }
+        this.updatedBy = updatedBy;
+        this.updatedDateTime = LocalDateTime.now();
     }
 
-    public AmendWorkOrderStateDecider getCloneAmend(String newOrgCode) {
+    public AmendWorkOrderStateDecider getCloneAmend(String newOrgCode, String username) {
         AmendWorkOrderStateDecider newObject = new AmendWorkOrderStateDecider();
         newObject.setAccepted(this.accepted);
         newObject.setActive(this.active);
@@ -237,6 +280,8 @@ public class AmendWorkOrderStateDecider {
         newObject.setSourceType(this.sourceType);
         newObject.setUnassigned(this.unassigned);
         newObject.setOrgCode(newOrgCode);
+        newObject.setCreatedDateTime();
+        newObject.setCreatedBy(username);
         return newObject;
     }
 }

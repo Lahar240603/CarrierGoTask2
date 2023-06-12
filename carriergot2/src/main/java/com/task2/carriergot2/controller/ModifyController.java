@@ -14,7 +14,7 @@ public class ModifyController {
     private iWorkOrderStateDeciderModifyService service;
 
     @PutMapping("/update/{orgCode}")
-    public WorkOrderStateDeciderRequest updateRequest(@RequestBody WorkOrderStateDeciderRequest request, @PathVariable("orgCode") String orgCode) {
-        return service.updateRequest(request, orgCode);
+    public WorkOrderStateDeciderRequest updateRequest(@RequestBody WorkOrderStateDeciderRequest request, @PathVariable("orgCode") String orgCode, @RequestAttribute("username") String username) {
+        return service.updateRequest(request, orgCode, username);
     }
 }

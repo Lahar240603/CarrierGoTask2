@@ -18,14 +18,14 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
     private UpdateRepository repository;
 
     @Override
-    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState, String orgCode) {
+    public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState, String orgCode, String username) {
         List<UpdateWorkOrderStateDecider> updatedList = new ArrayList<UpdateWorkOrderStateDecider>();
         for(UpdateWorkOrderStateDecider u : updatedState) {
             if(u.getDbId() == null) {
                 throw new WorkOrderStateDeciderIdMissing("UpdateWorkOrderState");
             }
             UpdateWorkOrderStateDecider tempState =  repository.findByDbId(u.getDbId()).orElseThrow(() -> new UpdateWorkOrderStateDeciderNotFoundException(u.getDbId()));
-            tempState.updateUpdateWorkOrderStateDecider(u);
+            tempState.updateUpdateWorkOrderStateDecider(u, username);
             repository.save(tempState);
             updatedList.add(tempState);
         }

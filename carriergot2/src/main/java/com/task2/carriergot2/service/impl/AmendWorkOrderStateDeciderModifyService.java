@@ -18,14 +18,14 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
     AmendRepository repository;
     
     @Override
-    public List<AmendWorkOrderStateDecider> updateAmendState(List<AmendWorkOrderStateDecider> updatedState, String orgCode) {
+    public List<AmendWorkOrderStateDecider> updateAmendState(List<AmendWorkOrderStateDecider> updatedState, String orgCode, String username) {
         List<AmendWorkOrderStateDecider> updatedList = new ArrayList<AmendWorkOrderStateDecider>();
         for(AmendWorkOrderStateDecider u : updatedState) {
             if(u.getDbId() == null) {
                 throw new WorkOrderStateDeciderIdMissing("AmendWorkOrderState");
             }
             AmendWorkOrderStateDecider tempState =  repository.findByDbId(u.getDbId()).orElseThrow(() -> new AmendWorkOrderStateDeciderNotFoundException(u.getDbId()));
-            tempState.updateAmendWorkOrderStateDecider(u);
+            tempState.updateAmendWorkOrderStateDecider(u, username);
             repository.save(tempState);
             updatedList.add(tempState);
         }

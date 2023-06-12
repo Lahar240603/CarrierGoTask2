@@ -2,8 +2,10 @@ package com.task2.carriergot2.model;
 
 import com.task2.carriergot2.enums.UpdateWorkOrderStateDeciderEnum;
 import com.task2.carriergot2.enums.converter.UpdateWorkOrderStateDeciderEnumConverter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "updateworkorderstatedecider")
@@ -67,11 +69,26 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
     @Column(name = "ORGCODE")
     private String orgCode;
 
+    @Column(name = "CREATED_BY")
+    private String createdBy;
+
+    @Column(name = "CREATED_DATE_TIME")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime createdDateTime;
+
+    @Column(name = "UPDATED_BY")
+    private String updatedBy;
+
+    @Column(name = "UPDATED_DATE_TIME")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime updatedDateTime;
+
+
 
     // Constructors, getters, and setters
     public UpdateWorkOrderStateDecider() {}
 
-    public UpdateWorkOrderStateDecider(String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, String sourceType, String orgCode) {
+    public UpdateWorkOrderStateDecider(String elementName, UpdateWorkOrderStateDeciderEnum unassigned, UpdateWorkOrderStateDeciderEnum assigned, UpdateWorkOrderStateDeciderEnum accepted, UpdateWorkOrderStateDeciderEnum rejected, UpdateWorkOrderStateDeciderEnum cancelled, UpdateWorkOrderStateDeciderEnum amendByO, UpdateWorkOrderStateDeciderEnum amendByR, UpdateWorkOrderStateDeciderEnum active, UpdateWorkOrderStateDeciderEnum completed, String sourceType, String orgCode, String createdBy) {
         this.elementName = elementName;
         this.unassigned = unassigned;
         this.assigned = assigned;
@@ -84,6 +101,8 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         this.completed = completed;
         this.sourceType = sourceType;
         this.orgCode = orgCode;
+        this.createdBy = createdBy;
+        this.createdDateTime = LocalDateTime.now();
     }
 
     public Long getDbId() {
@@ -190,7 +209,31 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         this.orgCode = orgCode;
     }
 
-    public void updateUpdateWorkOrderStateDecider(UpdateWorkOrderStateDecider newObject) {
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime() {
+        this.createdDateTime = LocalDateTime.now();
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void updateUpdateWorkOrderStateDecider(UpdateWorkOrderStateDecider newObject, String updatedBy){
 //        if (newObject.getDbId() != null) {
 //            this.dbId = newObject.getDbId();
 //        }
@@ -227,11 +270,13 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         if (newObject.getSourceType() != null) {
             this.sourceType = newObject.getSourceType();
         }
+        this.updatedBy = updatedBy;
+        this.updatedDateTime = LocalDateTime.now();
 //        if (newObject.getOrgCode() != null) {
 //            this.orgCode = newObject.getOrgCode();
         }
 
-    public UpdateWorkOrderStateDecider getCloneUpdate(String newOrgCode) {
+    public UpdateWorkOrderStateDecider getCloneUpdate(String newOrgCode, String username) {
         UpdateWorkOrderStateDecider newObject = new UpdateWorkOrderStateDecider();
         newObject.setAccepted(this.accepted);
         newObject.setActive(this.active);
@@ -245,6 +290,10 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         newObject.setSourceType(this.sourceType);
         newObject.setUnassigned(this.unassigned);
         newObject.setOrgCode(newOrgCode);
+        newObject.setCreatedDateTime();
+        newObject.setCreatedBy(username);
         return newObject;
     }
+
+
 }

@@ -13,6 +13,7 @@ services:
       DB_PASS: root
       DB_DB: project
       DB_PORT: 3306
+      AUTH_URL: "https://dev-apps.blumesolutions.com/jwt/decrypt"
     ports:
       - 8080:8080
       - 35729:35729

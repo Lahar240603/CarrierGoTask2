@@ -16,11 +16,11 @@ public class AmendServiceImplClone implements AmendServiceClone {
     private AmendRepository amendRepository;
 
     @Override
-    public List<AmendWorkOrderStateDecider> cloneByOrgCodeAmend(String sourceOrgCode, String newOrgCode) {
+    public List<AmendWorkOrderStateDecider> cloneByOrgCodeAmend(String sourceOrgCode, String newOrgCode, String username) {
         List<AmendWorkOrderStateDecider> t = amendRepository.findAllByOrgCode(sourceOrgCode);
         List<AmendWorkOrderStateDecider> fin = new ArrayList<AmendWorkOrderStateDecider>();
         for(AmendWorkOrderStateDecider i : t) {
-            AmendWorkOrderStateDecider tempObject =  i.getCloneAmend(newOrgCode);
+            AmendWorkOrderStateDecider tempObject =  i.getCloneAmend(newOrgCode, username);
             fin.add(tempObject);
         }
         return amendRepository.saveAllAndFlush(fin);
