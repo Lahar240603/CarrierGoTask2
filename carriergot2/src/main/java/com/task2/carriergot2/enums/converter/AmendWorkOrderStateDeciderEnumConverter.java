@@ -1,11 +1,13 @@
 package com.task2.carriergot2.enums.converter;
 
 import com.task2.carriergot2.enums.AmendWorkOrderStateDeciderEnum;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-@Converter(autoApply = true)
+@Component
+@Converter
 public class AmendWorkOrderStateDeciderEnumConverter implements AttributeConverter<AmendWorkOrderStateDeciderEnum, String> {
     @Override
     public String convertToDatabaseColumn(AmendWorkOrderStateDeciderEnum attribute) {

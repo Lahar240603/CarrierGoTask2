@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.*;
@@ -15,10 +16,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Objects;
+import java.io.InputStream;
+import java.util.*;
 
 @Configuration
 @Order(1)
@@ -42,6 +41,17 @@ public class AuthFilter implements Filter
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+//        System.out.println(request.getMethod());
+//        if(Objects.equals(request.getMethod(), "PUT")) {
+//            byte[] inputStreamBytes = StreamUtils.copyToByteArray(request.getInputStream());
+//            Map<String, String> jsonRequest = new ObjectMapper().readValue(inputStreamBytes, Map.class);
+//            String requestBodyJsonString = jsonRequest.get("body");
+//            String body = request.getReader().readLine();
+//
+//            // Do something with the body
+//            System.out.println(body);
+//            System.out.println(requestBodyJsonString);
+//        }
 
         if(request.getMethod().equals("OPTIONS")){
             String origin = request.getHeader("Origin");
@@ -84,6 +94,11 @@ public class AuthFilter implements Filter
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
+
+            // Do something with the body
+//            System.out.println(new String(body));
             chain.doFilter(request, response);
         }
 

@@ -1,5 +1,7 @@
 package com.task2.carriergot2.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum AmendWorkOrderStateDeciderEnum {
     O("O"),
     OR("O/R"),
@@ -13,7 +15,7 @@ public enum AmendWorkOrderStateDeciderEnum {
     }
 
     public String getValue() {
-        return this.value;
+        return value;
     }
 
     public static AmendWorkOrderStateDeciderEnum getEnum(String value) {
@@ -25,5 +27,13 @@ public enum AmendWorkOrderStateDeciderEnum {
         }
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
 
+    @JsonValue
+    public String getEnumValue() {
+        return this.value;
+    }
 }
