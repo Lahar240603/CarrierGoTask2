@@ -15,4 +15,6 @@ public interface AmendRepository extends JpaRepository<AmendWorkOrderStateDecide
     List<String> findDistinctOrgCode();
 
     public Optional<AmendWorkOrderStateDecider> findByDbId(Long dbId);
+
+    public List<AmendWorkOrderStateDecider> findAllByElementName(String elementName);
 }

@@ -1,4 +1,4 @@
-/*package com.example.demo3.entity;
+package com.task2.carriergot2.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
 @Entity
 @Table(name="dmswitch")
 public class DMSwitches {
@@ -51,7 +52,6 @@ public class DMSwitches {
 		return "DMSwitches [switchName=" + switchName + ", isEnabled=" + isEnabled + "]";
 	}
 }*/
-package com.task2.carriergot2.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

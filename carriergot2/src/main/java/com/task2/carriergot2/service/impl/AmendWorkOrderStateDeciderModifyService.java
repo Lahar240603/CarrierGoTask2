@@ -5,6 +5,7 @@ import com.task2.carriergot2.exceptions.WorkOrderStateDeciderIdMissing;
 import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
 import com.task2.carriergot2.repository.AmendRepository;
 import com.task2.carriergot2.service.iAmendWorkOrderStateDeciderModifyService;
+import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
     
     @Autowired
     AmendRepository repository;
+
+    @Autowired
+    private iWorkOrderStateDeciderGetOrg orgCodeService;
     
     @Override
     public List<AmendWorkOrderStateDecider> updateAmendState(List<AmendWorkOrderStateDecider> updatedState, String orgCode, String username) {
@@ -32,4 +36,19 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
 
         return repository.findAllByOrgCode(orgCode);
     }
+
+    @Override
+    public List<AmendWorkOrderStateDecider> addAmend(AmendWorkOrderStateDecider newAmend, String username) {
+        List<String> orgCodes = orgCodeService.findAllOrgCodes();
+        String elementName = newAmend.getElementName();
+//        List<AmendWorkOrderStateDecider> fin = new ArrayList<AmendWorkOrderStateDecider>();
+        if(newAmend.getDbId()==null) {
+            for(String orgCode : orgCodes) {
+                AmendWorkOrderStateDecider tempState = newAmend.getCloneAmend(orgCode, username);
+                repository.save(tempState);
+            }
+        }
+        return repository.findAllByElementName(elementName);
+    }
+
 }

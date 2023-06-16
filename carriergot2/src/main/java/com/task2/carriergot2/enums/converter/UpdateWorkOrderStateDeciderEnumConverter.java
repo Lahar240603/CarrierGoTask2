@@ -1,6 +1,7 @@
 package com.task2.carriergot2.enums.converter;
 
 import com.task2.carriergot2.enums.UpdateWorkOrderStateDeciderEnum;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

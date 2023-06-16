@@ -24,5 +24,5 @@ public class AmendServiceGetOrgImpl implements iAmendServiceGetOrg {
         return amendRepository.findDistinctOrgCode();
     }
 
-
+    
 }

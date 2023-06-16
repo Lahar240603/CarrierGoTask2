@@ -2,9 +2,11 @@ package com.task2.carriergot2.service.impl;
 
 import com.task2.carriergot2.exceptions.UpdateWorkOrderStateDeciderNotFoundException;
 import com.task2.carriergot2.exceptions.WorkOrderStateDeciderIdMissing;
+import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
 import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 import com.task2.carriergot2.repository.UpdateRepository;
 import com.task2.carriergot2.service.iUpdateWorkOrderStateDeciderModifyService;
+import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
 
     @Autowired
     private UpdateRepository repository;
+
+    @Autowired
+    private iWorkOrderStateDeciderGetOrg orgCodeService;
 
     @Override
     public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState, String orgCode, String username) {
@@ -30,5 +35,19 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
             updatedList.add(tempState);
         }
         return repository.findAllByOrgCode(orgCode);
+    }
+
+    @Override
+    public List<UpdateWorkOrderStateDecider> addUpdate(UpdateWorkOrderStateDecider newUpdate, String username) {
+        List<String> orgCodes = orgCodeService.findAllOrgCodes();
+        String elementName = newUpdate.getElementName();
+//        List<UpdateWorkOrderStateDecider> fin = new ArrayList<UpdateWorkOrderStateDecider>();
+        if(newUpdate.getDbId()==null) {
+            for(String orgCode : orgCodes) {
+                UpdateWorkOrderStateDecider tempState = newUpdate.getCloneUpdate(orgCode, username);
+                repository.save(tempState);
+            }
+        }
+        return repository.findAllByElementName(elementName);
     }
 }
