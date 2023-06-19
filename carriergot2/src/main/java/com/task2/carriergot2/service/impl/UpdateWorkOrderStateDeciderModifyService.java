@@ -8,6 +8,7 @@ import com.task2.carriergot2.repository.UpdateRepository;
 import com.task2.carriergot2.service.iUpdateWorkOrderStateDeciderModifyService;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
             repository.save(tempState);
             updatedList.add(tempState);
         }
-        return repository.findAllByOrgCode(orgCode);
+        return repository.findAllByOrgCode(orgCode, Sort.by(Sort.Direction.ASC, "elementName"));
     }
 
     @Override
