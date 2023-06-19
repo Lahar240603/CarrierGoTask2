@@ -1,5 +1,6 @@
 package com.task2.carriergot2.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,8 @@ public class DMSwitchService {
     public DMSwitches addSwitch(DMSwitches dmswitch) {
       DMSwitches newSwitch = new DMSwitches();
               newSwitch.setSwitchName(dmswitch.getSwitchName());
-              newSwitch.setIsEnabled(dmswitch.getIsEnabled());       	
+              newSwitch.setIsEnabled(dmswitch.getIsEnabled());
+              newSwitch.setCreatedDateTime(LocalDateTime.now());
          return dmswitchRepository.save(newSwitch);
          }
 //        catch (Exception ex) {
@@ -51,6 +53,10 @@ public class DMSwitchService {
     public DMSwitches updateSwitch(DMSwitches dmswitch) {
         Optional<DMSwitches> existingSwitch = dmswitchRepository.findById(dmswitch.getSwitchName());
         if (existingSwitch.isPresent()) {
+            DMSwitches updatedSwitch = existingSwitch.get();
+            updatedSwitch.setIsEnabled(dmswitch.getIsEnabled());
+            updatedSwitch.setUpdatedBy(dmswitch.getUpdatedBy());
+            updatedSwitch.setUpdatedDateTime(LocalDateTime.now());
             return dmswitchRepository.save(dmswitch);
         }
         return null; 
