@@ -102,6 +102,7 @@ public ResponseEntity<DMSwitches> addOrUpdate(@PathVariable("name") String dmswi
 
 package com.task2.carriergot2.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.task2.carriergot2.model.DMSwitches;
@@ -109,18 +110,10 @@ import com.task2.carriergot2.service.DMSwitchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("/dmswitches")
 public class DMSwitchController {
     @Autowired
@@ -155,8 +148,10 @@ public class DMSwitchController {
 
    
     @PostMapping("/add")
-    public ResponseEntity<DMSwitches> addSwitch(@RequestBody DMSwitches newSwitch) {
+    public ResponseEntity<DMSwitches> addSwitch(@RequestBody DMSwitches newSwitch, @RequestAttribute("username") String username) {
       try {
+          newSwitch.setCreatedBy(username);
+          newSwitch.setCreatedDateTime(LocalDateTime.now());
         DMSwitches savedSwitch = dmswitchService.addSwitch(newSwitch);
         return new ResponseEntity<>(savedSwitch, HttpStatus.CREATED);
       } catch (Exception ex) {
@@ -166,12 +161,14 @@ public class DMSwitchController {
     }
 
     @PutMapping("/update/{name}")
-    public ResponseEntity<DMSwitches> updateSwitch(@PathVariable("name") String switchName, @RequestBody DMSwitches updatedSwitch) {
+    public ResponseEntity<DMSwitches> updateSwitch(@PathVariable("name") String switchName, @RequestBody DMSwitches updatedSwitch, @RequestAttribute("username") String username) {
       try {
         DMSwitches existingSwitch = dmswitchService.getDMSwitchByName(switchName);
         if (existingSwitch != null) {
           existingSwitch.setSwitchName(switchName);
           existingSwitch.setIsEnabled(updatedSwitch.getIsEnabled());
+          existingSwitch.setUpdatedBy(username);
+          existingSwitch.setUpdatedDateTime(LocalDateTime.now());
           DMSwitches savedSwitch = dmswitchService.updateSwitch(existingSwitch);
           return new ResponseEntity<>(savedSwitch, HttpStatus.OK);
         } else {
