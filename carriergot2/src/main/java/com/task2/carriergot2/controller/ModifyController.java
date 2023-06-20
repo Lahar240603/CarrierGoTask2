@@ -21,9 +21,9 @@ public class ModifyController {
     }
 
     @PutMapping("/addElement")
-        public WorkOrderStateDeciderRequest addRequest(@RequestBody WorkOrderStateDeciderRequest request, @RequestAttribute("username") String username) {
+        public WorkOrderStateDeciderRequest addRequest(@RequestBody WorkOrderStateDeciderRequest request, @RequestAttribute("username") String username, @RequestHeader("Authorization") String token) {
         AmendWorkOrderStateDecider newAmend = request.getAmendList().get(0);
         UpdateWorkOrderStateDecider newUpdate = request.getUpdateList().get(0);
-        return service.addRequest(newAmend, newUpdate, username);
+        return service.addRequest(newAmend, newUpdate, username, token);
     }
 }

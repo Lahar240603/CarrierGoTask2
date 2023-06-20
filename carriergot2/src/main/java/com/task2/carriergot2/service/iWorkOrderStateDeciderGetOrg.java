@@ -6,10 +6,11 @@ import com.task2.carriergot2.utils.WorkOrderStateDeciderRequest;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface iWorkOrderStateDeciderGetOrg {
 
     public WorkOrderStateDeciderRequest getOrgRequest(String getOrg);
 
-    List<String> findAllOrgCodes();
+    List<String> findAllOrgCodes(String token);
 }

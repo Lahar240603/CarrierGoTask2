@@ -7,5 +7,5 @@ import java.util.List;
 public interface iUpdateWorkOrderStateDeciderModifyService {
     public List<UpdateWorkOrderStateDecider> updateUpdatedecider(List<UpdateWorkOrderStateDecider> updatedState, String orgCode, String username);
 
-    List<UpdateWorkOrderStateDecider> addUpdate(UpdateWorkOrderStateDecider newUpdate, String username);
+    List<UpdateWorkOrderStateDecider> addUpdate(UpdateWorkOrderStateDecider newUpdate, String username, String token);
 }

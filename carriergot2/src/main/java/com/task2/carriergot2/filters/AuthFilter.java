@@ -94,10 +94,6 @@ public class AuthFilter implements Filter
                 e.printStackTrace();
             }
 
-
-
-            // Do something with the body
-//            System.out.println(new String(body));
             chain.doFilter(request, response);
         }
 

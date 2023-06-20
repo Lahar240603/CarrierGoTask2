@@ -33,9 +33,9 @@ public class WorkOrderStateDeciderModifyService implements iWorkOrderStateDecide
 
     @Override
     @Transactional
-    public WorkOrderStateDeciderRequest addRequest(AmendWorkOrderStateDecider newAmend, UpdateWorkOrderStateDecider newUpdate, String username) {
-        List<UpdateWorkOrderStateDecider> newUpdateState = updateService.addUpdate(newUpdate, username);
-        List<AmendWorkOrderStateDecider> newAmendState = amendService.addAmend(newAmend, username);
+    public WorkOrderStateDeciderRequest addRequest(AmendWorkOrderStateDecider newAmend, UpdateWorkOrderStateDecider newUpdate, String username, String token) {
+        List<UpdateWorkOrderStateDecider> newUpdateState = updateService.addUpdate(newUpdate, username, token);
+        List<AmendWorkOrderStateDecider> newAmendState = amendService.addAmend(newAmend, username, token);
         return new WorkOrderStateDeciderRequest(newAmendState, newUpdateState);
     }
 }

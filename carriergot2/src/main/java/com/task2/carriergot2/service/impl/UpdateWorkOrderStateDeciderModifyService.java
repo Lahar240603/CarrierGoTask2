@@ -39,8 +39,8 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
     }
 
     @Override
-    public List<UpdateWorkOrderStateDecider> addUpdate(UpdateWorkOrderStateDecider newUpdate, String username) {
-        List<String> orgCodes = orgCodeService.findAllOrgCodes();
+    public List<UpdateWorkOrderStateDecider> addUpdate(UpdateWorkOrderStateDecider newUpdate, String username, String token) {
+        List<String> orgCodes = orgCodeService.findAllOrgCodes(token);
         String elementName = newUpdate.getElementName();
 //        List<UpdateWorkOrderStateDecider> fin = new ArrayList<UpdateWorkOrderStateDecider>();
         if(newUpdate.getDbId()==null) {

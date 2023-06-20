@@ -7,5 +7,5 @@ import java.util.List;
 public interface iAmendWorkOrderStateDeciderModifyService {
     public List<AmendWorkOrderStateDecider> updateAmendState(List<AmendWorkOrderStateDecider> updatedState, String orgCode, String username);
 
-    List<AmendWorkOrderStateDecider> addAmend(AmendWorkOrderStateDecider newAmend, String username);
+    List<AmendWorkOrderStateDecider> addAmend(AmendWorkOrderStateDecider newAmend, String username, String token);
 }

@@ -11,6 +11,6 @@ public interface iWorkOrderStateDeciderModifyService {
 //=======
 //    public WorkOrderStateDeciderRequest updateRequest(WorkOrderStateDeciderRequest request, String orgCode);
 
-    public WorkOrderStateDeciderRequest addRequest(AmendWorkOrderStateDecider newAmend, UpdateWorkOrderStateDecider newUpdate, String username);
+    public WorkOrderStateDeciderRequest addRequest(AmendWorkOrderStateDecider newAmend, UpdateWorkOrderStateDecider newUpdate, String username, String token);
 //>>>>>>> Stashed changes
 }

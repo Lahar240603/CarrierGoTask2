@@ -17,8 +17,8 @@ public class ControllerGetOrg {
     private iWorkOrderStateDeciderGetOrg service;
 
     @GetMapping("/orgCodes")
-    public List<String> getAllOrgCodes(){
-        return service.findAllOrgCodes();
+    public List<String> getAllOrgCodes(@RequestHeader("Authorization") String token){
+        return service.findAllOrgCodes(token);
     }
 
     @GetMapping("/{orgCode}")
