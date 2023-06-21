@@ -1,12 +1,14 @@
 package com.task2.carriergot2.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
+
+
 
 @Entity
 @Table(name="dmswitch")
