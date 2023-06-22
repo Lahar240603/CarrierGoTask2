@@ -1,7 +1,9 @@
 package com.task2.carriergot2.model;
 
+import com.task2.carriergot2.enums.TableNameEnum;
 import com.task2.carriergot2.enums.UpdateWorkOrderStateDeciderEnum;
 import com.task2.carriergot2.enums.converter.UpdateWorkOrderStateDeciderEnumConverter;
+import com.task2.carriergot2.repository.MasterUserAuditRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -233,49 +235,6 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         return updatedDateTime;
     }
 
-    public void updateUpdateWorkOrderStateDecider(UpdateWorkOrderStateDecider newObject, String updatedBy){
-//        if (newObject.getDbId() != null) {
-//            this.dbId = newObject.getDbId();
-//        }
-//        if (newObject.getElementName() != null) {
-//            this.elementName = newObject.getElementName();
-//        }
-        if (newObject.getUnassigned() != null) {
-            this.unassigned = newObject.getUnassigned();
-        }
-        if (newObject.getAssigned() != null) {
-            this.assigned = newObject.getAssigned();
-        }
-        if (newObject.getAccepted() != null) {
-            this.accepted = newObject.getAccepted();
-        }
-        if (newObject.getRejected() != null) {
-            this.rejected = newObject.getRejected();
-        }
-        if (newObject.getCancelled() != null) {
-            this.cancelled = newObject.getCancelled();
-        }
-        if (newObject.getAmendByO() != null) {
-            this.amendByO = newObject.getAmendByO();
-        }
-        if (newObject.getAmendByR() != null) {
-            this.amendByR = newObject.getAmendByR();
-        }
-        if (newObject.getActive() != null) {
-            this.active = newObject.getActive();
-        }
-        if (newObject.getCompleted() != null) {
-            this.completed = newObject.getCompleted();
-        }
-        if (newObject.getSourceType() != null) {
-            this.sourceType = newObject.getSourceType();
-        }
-        this.updatedBy = updatedBy;
-        this.updatedDateTime = LocalDateTime.now();
-//        if (newObject.getOrgCode() != null) {
-//            this.orgCode = newObject.getOrgCode();
-        }
-
     public UpdateWorkOrderStateDecider getCloneUpdate(String newOrgCode, String username) {
         UpdateWorkOrderStateDecider newObject = new UpdateWorkOrderStateDecider();
         newObject.setAccepted(this.accepted);
@@ -293,6 +252,154 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         newObject.setCreatedDateTime();
         newObject.setCreatedBy(username);
         return newObject;
+    }
+
+    public void updateUpdateWorkOrderStateDecider(UpdateWorkOrderStateDecider newObject, String updatedBy, MasterUserAuditRepository repository){
+//        if (newObject.getDbId() != null) {
+//            this.dbId = newObject.getDbId();
+//        }
+//        if (newObject.getElementName() != null) {
+//            this.elementName = newObject.getElementName();
+//        }
+//        UpdateAmendUserAudit audit = new UpdateAmendUserAudit();
+
+        LocalDateTime tempTime = LocalDateTime.now();
+
+        if (newObject.getUnassigned() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("unassigned");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.unassigned.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.unassigned = newObject.getUnassigned();
+            audit.setNewvalue(this.unassigned.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getAssigned() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("assigned");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.assigned.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.assigned = newObject.getUnassigned();
+            audit.setNewvalue(this.assigned.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getAccepted() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("accepted");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.accepted.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.accepted = newObject.getAccepted();
+            audit.setNewvalue(this.accepted.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getRejected() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("rejected");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.rejected.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.rejected = newObject.getRejected();
+            audit.setNewvalue(this.rejected.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getCancelled() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("cancelled");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.cancelled.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.cancelled = newObject.getCancelled();
+            audit.setNewvalue(this.cancelled.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getAmendByO() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("amendByO");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.amendByO.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.amendByO = newObject.getAmendByO();
+            audit.setNewvalue(this.amendByO.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getAmendByR() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("amendByR");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.amendByR.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.amendByR = newObject.getAmendByR();
+            audit.setNewvalue(this.amendByR.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getActive() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("active");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.active.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.active = newObject.getActive();
+            audit.setNewvalue(this.active.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getCompleted() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("completed");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.completed.getValue());
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.completed = newObject.getCompleted();
+            audit.setNewvalue(this.completed.getValue());
+            repository.save(audit);
+        }
+
+        if (newObject.getSourceType() != null) {
+            MasterUserAudit audit = new MasterUserAudit();
+            audit.setField("sourceType");
+            audit.setEntityId(this.dbId);
+            audit.setEntityName(TableNameEnum.UpdateWorkOrderStateDecider);
+            audit.setOldvalue(this.sourceType);
+            audit.setUpdatedDateTime(tempTime);
+            audit.setUpdatedBy(updatedBy);
+            this.sourceType = newObject.getSourceType();
+            audit.setNewvalue(this.sourceType);
+            repository.save(audit);
+        }
+
+        this.updatedBy = updatedBy;
+        this.updatedDateTime = tempTime;
+
+//        if (newObject.getOrgCode() != null) {
+//            this.orgCode = newObject.getOrgCode();
     }
 
 

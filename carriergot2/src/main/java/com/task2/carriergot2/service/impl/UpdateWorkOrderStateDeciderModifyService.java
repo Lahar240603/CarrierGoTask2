@@ -2,8 +2,8 @@ package com.task2.carriergot2.service.impl;
 
 import com.task2.carriergot2.exceptions.UpdateWorkOrderStateDeciderNotFoundException;
 import com.task2.carriergot2.exceptions.WorkOrderStateDeciderIdMissing;
-import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
 import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
+import com.task2.carriergot2.repository.MasterUserAuditRepository;
 import com.task2.carriergot2.repository.UpdateRepository;
 import com.task2.carriergot2.service.iUpdateWorkOrderStateDeciderModifyService;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
@@ -16,6 +16,9 @@ import java.util.List;
 
 @Service
 public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrderStateDeciderModifyService {
+
+    @Autowired
+    private MasterUserAuditRepository userAudit;
 
     @Autowired
     private UpdateRepository repository;
@@ -31,7 +34,7 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
                 throw new WorkOrderStateDeciderIdMissing("UpdateWorkOrderState");
             }
             UpdateWorkOrderStateDecider tempState =  repository.findByDbId(u.getDbId()).orElseThrow(() -> new UpdateWorkOrderStateDeciderNotFoundException(u.getDbId()));
-            tempState.updateUpdateWorkOrderStateDecider(u, username);
+            tempState.updateUpdateWorkOrderStateDecider(u,username, userAudit);
             repository.save(tempState);
             updatedList.add(tempState);
         }
