@@ -1,6 +1,11 @@
 package com.task2.carriergot2.model;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "mediation_routing")
@@ -19,6 +24,23 @@ public class Mediation_routing {
     @Column(name = "VERSION")
     private BigInteger version;
 
+    @Column(name = "CREATED_BY")
+    private String createdBy;
+
+    @Column(name = "CREATED_DATE_TIME")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime createdDateTime;
+
+    @Column(name = "UPDATED_BY")
+    private String updatedBy;
+
+    @Column(name = "UPDATED_DATE_TIME")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime updatedDateTime;
+
+    @OneToMany(mappedBy = "mediationRouting", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Mediation_routing_child> childs = new ArrayList<Mediation_routing_child>();
+
     public Mediation_routing(){
         super();
     }
@@ -29,6 +51,14 @@ public class Mediation_routing {
         this.key_id = key_id;
         this.value = value;
         this.version = version;
+    }
+
+    public List<Mediation_routing_child> getChilds() {
+        return childs;
+    }
+
+    public void setChilds(List<Mediation_routing_child> childs) {
+        this.childs = childs;
     }
 
     public BigInteger getId() {
@@ -64,6 +94,38 @@ public class Mediation_routing {
         this.version = version;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public LocalDateTime getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
+
     @Override
     public String toString() {
         return "Mediation_routing{" +
@@ -71,6 +133,10 @@ public class Mediation_routing {
                 ", key_id='" + key_id + '\'' +
                 ", value='" + value + '\'' +
                 ", version=" + version +
+                ", createdBy='" + createdBy + '\'' +
+                ", createdDateTime=" + createdDateTime +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", updatedDateTime=" + updatedDateTime +
                 '}';
     }
 }

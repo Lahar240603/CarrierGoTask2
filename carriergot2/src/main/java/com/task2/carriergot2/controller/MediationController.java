@@ -1,6 +1,7 @@
 package com.task2.carriergot2.controller;
 
 import com.task2.carriergot2.model.Mediation_routing;
+import com.task2.carriergot2.model.Mediation_routing_child;
 import com.task2.carriergot2.repository.Mediation_Repository;
 import com.task2.carriergot2.service.iMediationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,8 +37,8 @@ public class MediationController {
     }
 
     @PostMapping("/addId")
-    public ResponseEntity<Mediation_routing> AddId(@RequestBody Mediation_routing instance){
-        Mediation_routing obj = routerService.AddId(instance);
+    public ResponseEntity<Mediation_routing> AddId(@RequestBody Mediation_routing instance, @RequestAttribute("username") String username){
+        Mediation_routing obj = routerService.AddId(instance, username);
 //        try{
 //            obj = routerService.AddId(instance);
 //        }
@@ -52,8 +54,8 @@ public class MediationController {
 //    }
 
     @PutMapping("/updateId")
-    public ResponseEntity<Mediation_routing> UpdateId(@RequestBody Mediation_routing instance){
-        Mediation_routing obj = routerService.UpdateId(instance);
+    public ResponseEntity<Mediation_routing> UpdateId(@RequestBody Mediation_routing instance, @RequestAttribute("username") String username){
+        Mediation_routing obj = routerService.UpdateId(instance, username);
 //        try{
 //            obj = routerService.UpdateId(instance);
 //        }
@@ -75,5 +77,17 @@ public class MediationController {
             ex.getMessage();
         }
         return new ResponseEntity<Mediation_routing>(obj, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllChilds/{id}")
+    public ResponseEntity<List<Mediation_routing_child>> getChilds(@PathVariable("id") BigInteger Id){
+        List<Mediation_routing_child> instance = new ArrayList<Mediation_routing_child>();
+        try{
+            instance = routerService.getChilds(Id);
+        }
+        catch(Exception ex){
+            ex.getMessage();
+        }
+        return new ResponseEntity<List<Mediation_routing_child>>(instance, HttpStatus.OK);
     }
 }
