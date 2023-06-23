@@ -12,5 +12,7 @@ public interface iWorkOrderStateDeciderGetOrg {
 
     public WorkOrderStateDeciderRequest getOrgRequest(String getOrg);
 
+    List<String> findAllTableOrgCodes(String token);
+
     List<String> findAllOrgCodes(String token);
 }

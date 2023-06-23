@@ -33,9 +33,13 @@ public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg
     }
 
     @Override
+    public List<String> findAllTableOrgCodes(String token) {
+        return amendedService.findAllTableOrgCodes(token);
+    }
+
+    @Override
     public List<String> findAllOrgCodes(String token) {
         return amendedService.findAllOrgCodes(token);
     }
-
 
 }

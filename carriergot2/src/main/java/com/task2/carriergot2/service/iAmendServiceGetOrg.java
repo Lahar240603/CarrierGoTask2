@@ -9,5 +9,6 @@ public interface iAmendServiceGetOrg {
 
     public List<AmendWorkOrderStateDecider> findByOrgCode(String orgCode);
 
+    List<String> findAllTableOrgCodes(String token);
     List<String> findAllOrgCodes(String token);
 }

@@ -16,6 +16,11 @@ public class ControllerGetOrg {
     @Autowired
     private iWorkOrderStateDeciderGetOrg service;
 
+    @GetMapping("/tableOrgCodes")
+    public List<String> getAllTableOrgCodes(@RequestHeader("Authorization") String token){
+        return service.findAllTableOrgCodes(token);
+    }
+
     @GetMapping("/orgCodes")
     public List<String> getAllOrgCodes(@RequestHeader("Authorization") String token){
         return service.findAllOrgCodes(token);

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.task2.carriergot2.service.iAmendServiceGetOrg;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +31,16 @@ public class AmendServiceGetOrgImpl implements iAmendServiceGetOrg {
     }
 
     @Override
-    public List<String> findAllOrgCodes(String token) {
-        List<String> init =  amendRepository.findDistinctOrgCode();
+    public List<String> findAllTableOrgCodes(String token) {
+        return amendRepository.findDistinctOrgCode();
+    }
 
-        init.add("APIS");
+    @Override
+    public List<String> findAllOrgCodes(String token) {
+//        List<String> init =  amendRepository.findDistinctOrgCode();
+        List<String> init = new ArrayList<>();
+
+//        init.add("APIS");
 
 //        Getting OrgCodes from Blume API
         String uri = "https://dev-apps.blumesolutions.com/blumepfmdapi/v2/organization/?correlationId=DM&page=1&size=1000";
@@ -71,6 +79,7 @@ public class AmendServiceGetOrgImpl implements iAmendServiceGetOrg {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Collections.sort(init);
         return init;
     }
 
