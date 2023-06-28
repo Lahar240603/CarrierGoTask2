@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "amendworkorderstatedecider")
-public class AmendWorkOrderStateDecider {
+public class AmendWorkOrderStateDecider implements Comparable<AmendWorkOrderStateDecider>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DBID")
@@ -370,7 +370,7 @@ public class AmendWorkOrderStateDecider {
         this.updatedDateTime = tempTime;
     }
 
-    public AmendWorkOrderStateDecider getCloneAmend(String newOrgCode, String username) {
+    public AmendWorkOrderStateDecider getCloneAmend(String newOrgCode, String username, AmendWorkOrderStateDecider changes) {
         AmendWorkOrderStateDecider newObject = new AmendWorkOrderStateDecider();
         newObject.setAccepted(this.accepted);
         newObject.setActive(this.active);
@@ -386,6 +386,46 @@ public class AmendWorkOrderStateDecider {
         newObject.setOrgCode(newOrgCode);
         newObject.setCreatedDateTime();
         newObject.setCreatedBy(username);
+        if (changes != null) {
+            if (changes.getAccepted() != null) {
+                newObject.setAccepted(changes.getAccepted());
+            }
+            if (changes.getActive() != null) {
+                newObject.setActive(changes.getActive());
+            }
+            if (changes.getAssigned() != null) {
+                newObject.setAssigned(changes.getAssigned());
+            }
+            if (changes.getAmendByO() != null) {
+                newObject.setAmendByO(changes.getAmendByO());
+            }
+            if (changes.getAmendByR() != null) {
+                newObject.setAmendByR(changes.getAmendByR());
+            }
+            if (changes.getCancelled() != null) {
+                newObject.setCancelled(changes.getCancelled());
+            }
+            if (changes.getCompleted() != null) {
+                newObject.setCompleted(changes.getCompleted());
+            }
+            if (changes.getElementName() != null) {
+                newObject.setElementName(changes.getElementName());
+            }
+            if (changes.getRejected() != null) {
+                newObject.setRejected(changes.getRejected());
+            }
+            if (changes.getSourceType() != null) {
+                newObject.setSourceType(changes.getSourceType());
+            }
+            if (changes.getUnassigned() != null) {
+                newObject.setUnassigned(changes.getUnassigned());
+            }
+        }
         return newObject;
+    }
+
+    @Override
+    public int compareTo(AmendWorkOrderStateDecider o) {
+        return this.dbId.compareTo(o.getDbId());
     }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "updateworkorderstatedecider")
-public class UpdateWorkOrderStateDecider implements Cloneable {
+public class UpdateWorkOrderStateDecider implements Comparable<UpdateWorkOrderStateDecider> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DBID")
@@ -235,7 +235,7 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         return updatedDateTime;
     }
 
-    public UpdateWorkOrderStateDecider getCloneUpdate(String newOrgCode, String username) {
+    public UpdateWorkOrderStateDecider getCloneUpdate(String newOrgCode, String username, UpdateWorkOrderStateDecider changes) {
         UpdateWorkOrderStateDecider newObject = new UpdateWorkOrderStateDecider();
         newObject.setAccepted(this.accepted);
         newObject.setActive(this.active);
@@ -251,18 +251,46 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
         newObject.setOrgCode(newOrgCode);
         newObject.setCreatedDateTime();
         newObject.setCreatedBy(username);
+        if (changes != null) {
+            if (changes.getAccepted() != null) {
+                newObject.setAccepted(changes.getAccepted());
+            }
+            if (changes.getActive() != null) {
+                newObject.setActive(changes.getActive());
+            }
+            if (changes.getAssigned() != null) {
+                newObject.setAssigned(changes.getAssigned());
+            }
+            if (changes.getAmendByO() != null) {
+                newObject.setAmendByO(changes.getAmendByO());
+            }
+            if (changes.getAmendByR() != null) {
+                newObject.setAmendByR(changes.getAmendByR());
+            }
+            if (changes.getCancelled() != null) {
+                newObject.setCancelled(changes.getCancelled());
+            }
+            if (changes.getCompleted() != null) {
+                newObject.setCompleted(changes.getCompleted());
+            }
+            if (changes.getElementName() != null) {
+                newObject.setElementName(changes.getElementName());
+            }
+            if (changes.getRejected() != null) {
+                newObject.setRejected(changes.getRejected());
+            }
+            if (changes.getSourceType() != null) {
+                newObject.setSourceType(changes.getSourceType());
+            }
+            if (changes.getUnassigned() != null) {
+                newObject.setUnassigned(changes.getUnassigned());
+            }
+        }
         return newObject;
+
     }
 
     public void updateUpdateWorkOrderStateDecider(UpdateWorkOrderStateDecider newObject, String updatedBy, MasterUserAuditRepository repository){
-//        if (newObject.getDbId() != null) {
-//            this.dbId = newObject.getDbId();
-//        }
-//        if (newObject.getElementName() != null) {
-//            this.elementName = newObject.getElementName();
-//        }
-//        UpdateAmendUserAudit audit = new UpdateAmendUserAudit();
-
         LocalDateTime tempTime = LocalDateTime.now();
 
         if (newObject.getUnassigned() != null) {
@@ -403,4 +431,8 @@ public class UpdateWorkOrderStateDecider implements Cloneable {
     }
 
 
+    @Override
+    public int compareTo(UpdateWorkOrderStateDecider o) {
+        return this.dbId.compareTo(o.getDbId());
+    }
 }

@@ -49,7 +49,7 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
 //        List<AmendWorkOrderStateDecider> fin = new ArrayList<AmendWorkOrderStateDecider>();
         if(newAmend.getDbId()==null) {
             for(String orgCode : orgCodes) {
-                AmendWorkOrderStateDecider tempState = newAmend.getCloneAmend(orgCode, username);
+                AmendWorkOrderStateDecider tempState = newAmend.getCloneAmend(orgCode, username, null);
                 repository.save(tempState);
             }
         }

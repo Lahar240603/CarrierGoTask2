@@ -5,5 +5,5 @@ import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
 import java.util.List;
 
 public interface AmendServiceClone {
-    public List<AmendWorkOrderStateDecider> cloneByOrgCodeAmend(String sourceOrgCode, String newOrgCode, String username);
+    public List<AmendWorkOrderStateDecider> cloneByOrgCodeAmend(String sourceOrgCode, String newOrgCode, String username, List<AmendWorkOrderStateDecider> amendList);
 }

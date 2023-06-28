@@ -48,7 +48,7 @@ public class UpdateWorkOrderStateDeciderModifyService implements iUpdateWorkOrde
 //        List<UpdateWorkOrderStateDecider> fin = new ArrayList<UpdateWorkOrderStateDecider>();
         if(newUpdate.getDbId()==null) {
             for(String orgCode : orgCodes) {
-                UpdateWorkOrderStateDecider tempState = newUpdate.getCloneUpdate(orgCode, username);
+                UpdateWorkOrderStateDecider tempState = newUpdate.getCloneUpdate(orgCode, username, null);
                 repository.save(tempState);
             }
         }

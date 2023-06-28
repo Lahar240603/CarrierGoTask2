@@ -41,16 +41,6 @@ public class AuthFilter implements Filter
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-//        if(Objects.equals(request.getMethod(), "PUT")) {
-//            byte[] inputStreamBytes = StreamUtils.copyToByteArray(request.getInputStream());
-//            Map<String, String> jsonRequest = new ObjectMapper().readValue(inputStreamBytes, Map.class);
-//            String requestBodyJsonString = jsonRequest.get("body");
-//            String body = request.getReader().readLine();
-//
-//            // Do something with the body
-//            System.out.println(body);
-//            System.out.println(requestBodyJsonString);
-//        }
 
         if(request.getMethod().equals("OPTIONS")){
             String origin = request.getHeader("Origin");
