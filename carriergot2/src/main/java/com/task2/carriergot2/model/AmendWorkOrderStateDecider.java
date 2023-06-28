@@ -4,12 +4,14 @@ import com.task2.carriergot2.enums.AmendWorkOrderStateDeciderEnum;
 import com.task2.carriergot2.enums.TableNameEnum;
 import com.task2.carriergot2.enums.converter.AmendWorkOrderStateDeciderEnumConverter;
 import com.task2.carriergot2.repository.MasterUserAuditRepository;
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Audited
 @Table(name = "amendworkorderstatedecider")
 public class AmendWorkOrderStateDecider implements Comparable<AmendWorkOrderStateDecider>{
     @Id
