@@ -23,7 +23,6 @@ public class UpdateServiceImplClone implements UpdateServiceClone {
         for(UpdateWorkOrderStateDecider i : t) {
             UpdateWorkOrderStateDecider tempObject;
             if(updateList.size() !=0 && Objects.equals(i.getDbId(), updateList.get(j).getDbId())) {
-                System.out.println("i.getDbId() = " + updateList.get(j).getDbId());
                 tempObject =  i.getCloneUpdate(newOrgCode, username, updateList.get(j));
                 fin.add(tempObject);
                 if(j < updateList.size() - 1) {

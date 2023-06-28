@@ -31,16 +31,13 @@ public class AmendServiceGetOrgImpl implements iAmendServiceGetOrg {
     }
 
     @Override
-    public List<String> findAllTableOrgCodes(String token) {
+    public List<String> findAllTableOrgCodes() {
         return amendRepository.findDistinctOrgCode();
     }
 
     @Override
     public List<String> findAllOrgCodes(String token) {
-//        List<String> init =  amendRepository.findDistinctOrgCode();
         List<String> init = new ArrayList<>();
-
-//        init.add("APIS");
 
 //        Getting OrgCodes from Blume API
         String uri = "https://dev-apps.blumesolutions.com/blumepfmdapi/v2/organization/?correlationId=DM&page=1&size=1000";
@@ -69,7 +66,6 @@ public class AmendServiceGetOrgImpl implements iAmendServiceGetOrg {
                     orgCode = code.get().asText();
 
                     if(!init.contains(orgCode) && !orgCode.isEmpty()) {
-                        System.out.println(orgCode);
                         init.add(orgCode);
                     }
                 }

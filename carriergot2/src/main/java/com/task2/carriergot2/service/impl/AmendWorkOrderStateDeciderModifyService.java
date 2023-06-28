@@ -44,7 +44,7 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
 
     @Override
     public List<AmendWorkOrderStateDecider> addAmend(AmendWorkOrderStateDecider newAmend, String username, String token) {
-        List<String> orgCodes = orgCodeService.findAllOrgCodes(token);
+        List<String> orgCodes = orgCodeService.findAllTableOrgCodes(token);
         String elementName = newAmend.getElementName();
 //        List<AmendWorkOrderStateDecider> fin = new ArrayList<AmendWorkOrderStateDecider>();
         if(newAmend.getDbId()==null) {

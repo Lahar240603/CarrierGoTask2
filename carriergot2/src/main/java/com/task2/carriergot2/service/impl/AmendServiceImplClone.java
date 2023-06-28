@@ -27,7 +27,6 @@ public class AmendServiceImplClone implements AmendServiceClone {
         for(AmendWorkOrderStateDecider i : t) {
             AmendWorkOrderStateDecider tempObject;
             if(amendList.size() != 0 && Objects.equals(i.getDbId(), amendList.get(j).getDbId())) {
-                System.out.println("i.getDbId() = " + amendList.get(j).getDbId());
                 tempObject =  i.getCloneAmend(newOrgCode, username, amendList.get(j));
                 fin.add(tempObject);
                 if(j < amendList.size() - 1) {

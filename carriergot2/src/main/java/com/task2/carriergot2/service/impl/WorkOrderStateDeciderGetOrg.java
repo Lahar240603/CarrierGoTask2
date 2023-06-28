@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg {
@@ -34,7 +33,7 @@ public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg
 
     @Override
     public List<String> findAllTableOrgCodes(String token) {
-        return amendedService.findAllTableOrgCodes(token);
+        return amendedService.findAllTableOrgCodes();
     }
 
     @Override
