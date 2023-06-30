@@ -4,7 +4,6 @@ import com.task2.carriergot2.exceptions.AmendWorkOrderStateDeciderNotFoundExcept
 import com.task2.carriergot2.exceptions.WorkOrderStateDeciderIdMissing;
 import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
 import com.task2.carriergot2.repository.AmendRepository;
-import com.task2.carriergot2.repository.MasterUserAuditRepository;
 import com.task2.carriergot2.service.iAmendWorkOrderStateDeciderModifyService;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import java.util.List;
 
 @Service
 public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderStateDeciderModifyService {
-
-    @Autowired
-    private MasterUserAuditRepository userAudit;
 
     @Autowired
     AmendRepository repository;
@@ -34,7 +30,7 @@ public class AmendWorkOrderStateDeciderModifyService implements iAmendWorkOrderS
                 throw new WorkOrderStateDeciderIdMissing("AmendWorkOrderState");
             }
             AmendWorkOrderStateDecider tempState =  repository.findByDbId(u.getDbId()).orElseThrow(() -> new AmendWorkOrderStateDeciderNotFoundException(u.getDbId()));
-            tempState.updateAmendWorkOrderStateDecider(u, username,userAudit);
+            tempState.updateAmendWorkOrderStateDecider(u, username);
             repository.save(tempState);
             updatedList.add(tempState);
         }
