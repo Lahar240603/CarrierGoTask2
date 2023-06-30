@@ -6,8 +6,11 @@ import com.task2.carriergot2.repository.Mediation_Repository;
 import com.task2.carriergot2.repository.Mediation_Repository_child;
 import com.task2.carriergot2.service.iMediationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -51,10 +54,12 @@ public class MediationServiceImpl implements iMediationService {
 
     @Override
     public Mediation_routing UpdateId(Mediation_routing instance, String username){
-        Mediation_routing obj = null;
-        Mediation_routing_child child_obj = new Mediation_routing_child();
+//        Mediation_routing obj = null;
+//        Mediation_routing_child child_obj = new Mediation_routing_child();
         try{
-            obj = routerRepository.findById(instance.getId()).orElse(null);
+            Mediation_routing obj = routerRepository.findById(instance.getId()).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+            Mediation_routing_child child_obj = new Mediation_routing_child();
+//            obj = routerRepository.findById(instance.getId()).orElse(null);
             child_obj.setKey_id(obj.getKey_id());
             child_obj.setValue(obj.getValue());
             child_obj.setVersion(obj.getVersion());
@@ -70,22 +75,26 @@ public class MediationServiceImpl implements iMediationService {
 //                obj.setVersion(instance.getVersion());
 //            }
 //            else{
-                obj.setId(instance.getId());
-                obj.setKey_id(instance.getKey_id());
-                obj.setValue(instance.getValue());
-                BigInteger ver = instance.getVersion();
-                BigInteger inc = BigInteger.valueOf(1);
-                BigInteger ans = ver.add(inc);
-                obj.setVersion(ans);
-                obj.setUpdatedBy(username);
-                obj.setUpdatedDateTime(LocalDateTime.now());
-                childRepository.save(child_obj);
+            obj.setId(instance.getId());
+            obj.setKey_id(instance.getKey_id());
+            obj.setValue(instance.getValue());
+            BigInteger ver = instance.getVersion();
+            BigInteger inc = BigInteger.valueOf(1);
+            BigInteger ans = ver.add(inc);
+            obj.setVersion(ans);
+            obj.setUpdatedBy(username);
+            obj.setUpdatedDateTime(LocalDateTime.now());
+            childRepository.save(child_obj);
+            return routerRepository.save(obj);
             //}
         }
-        catch (Exception ex){
-            ex.getMessage();
+        catch (EntityNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
         }
-        return routerRepository.save(obj);
+        catch (Exception ex){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to update entity");
+        }
+//        return routerRepository.save(obj);
     }
 
     @Override

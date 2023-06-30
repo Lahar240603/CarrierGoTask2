@@ -12,7 +12,7 @@ import java.util.List;
 public class Mediation_routing {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
+    @Column(name="ID", columnDefinition = "BIGINT")
     private BigInteger Id;
 
     @Column(name = "KEY_ID")
@@ -21,7 +21,7 @@ public class Mediation_routing {
     @Column(name = "VALUE")
     private String value;
 
-    @Column(name = "VERSION")
+    @Column(name = "VERSION", columnDefinition = "BIGINT")
     private BigInteger version;
 
     @Column(name = "CREATED_BY")

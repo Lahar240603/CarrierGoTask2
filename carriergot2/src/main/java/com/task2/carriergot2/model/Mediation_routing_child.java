@@ -13,7 +13,7 @@ public class Mediation_routing_child {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="Child_ID")
+    @Column(name="Child_ID", columnDefinition = "BIGINT")
     private BigInteger child_id;
 
     @Column(name = "Child_KEY_ID")
@@ -22,7 +22,7 @@ public class Mediation_routing_child {
     @Column(name = "Child_VALUE")
     private String child_value;
 
-    @Column(name = "Child_VERSION")
+    @Column(name = "Child_VERSION", columnDefinition = "BIGINT")
     private BigInteger child_version;
 
     @Column(name = "Child_CREATED_BY")
