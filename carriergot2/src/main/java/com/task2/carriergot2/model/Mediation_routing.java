@@ -1,4 +1,5 @@
 package com.task2.carriergot2.model;
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Audited
 @Table(name = "mediation_routing")
 public class Mediation_routing {
     @Id
@@ -38,8 +40,8 @@ public class Mediation_routing {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime updatedDateTime;
 
-    @OneToMany(mappedBy = "mediationRouting", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Mediation_routing_child> childs = new ArrayList<Mediation_routing_child>();
+//    @OneToMany(mappedBy = "mediationRouting", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Mediation_routing_child> childs = new ArrayList<Mediation_routing_child>();
 
     public Mediation_routing(){
         super();
@@ -53,13 +55,13 @@ public class Mediation_routing {
         this.version = version;
     }
 
-    public List<Mediation_routing_child> getChilds() {
-        return childs;
-    }
-
-    public void setChilds(List<Mediation_routing_child> childs) {
-        this.childs = childs;
-    }
+//    public List<Mediation_routing_child> getChilds() {
+//        return childs;
+//    }
+//
+//    public void setChilds(List<Mediation_routing_child> childs) {
+//        this.childs = childs;
+//    }
 
     public BigInteger getId() {
         return Id;

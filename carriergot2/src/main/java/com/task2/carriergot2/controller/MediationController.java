@@ -1,7 +1,7 @@
 package com.task2.carriergot2.controller;
 
 import com.task2.carriergot2.model.Mediation_routing;
-import com.task2.carriergot2.model.Mediation_routing_child;
+//import com.task2.carriergot2.model.Mediation_routing_child;
 import com.task2.carriergot2.repository.Mediation_Repository;
 import com.task2.carriergot2.service.iMediationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,15 +79,21 @@ public class MediationController {
         return new ResponseEntity<Mediation_routing>(obj, HttpStatus.OK);
     }
 
+//    @GetMapping("/getAllChilds/{id}")
+//    public ResponseEntity<List<Mediation_routing_child>> getChilds(@PathVariable("id") BigInteger Id){
+//        List<Mediation_routing_child> instance = new ArrayList<Mediation_routing_child>();
+//        try{
+//            instance = routerService.getChilds(Id);
+//        }
+//        catch(Exception ex){
+//            ex.getMessage();
+//        }
+//        return new ResponseEntity<List<Mediation_routing_child>>(instance, HttpStatus.OK);
+//    }
+
     @GetMapping("/getAllChilds/{id}")
-    public ResponseEntity<List<Mediation_routing_child>> getChilds(@PathVariable("id") BigInteger Id){
-        List<Mediation_routing_child> instance = new ArrayList<Mediation_routing_child>();
-        try{
-            instance = routerService.getChilds(Id);
-        }
-        catch(Exception ex){
-            ex.getMessage();
-        }
-        return new ResponseEntity<List<Mediation_routing_child>>(instance, HttpStatus.OK);
+    public ResponseEntity<List<Mediation_routing>> getRevisionsById(@PathVariable("id") BigInteger Id){
+        List<Mediation_routing> obj = routerService.getRevisionsById(Id);
+        return new ResponseEntity<List<Mediation_routing>>(obj, HttpStatus.OK);
     }
 }

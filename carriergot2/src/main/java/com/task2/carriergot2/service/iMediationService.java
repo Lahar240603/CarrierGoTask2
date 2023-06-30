@@ -1,7 +1,7 @@
 package com.task2.carriergot2.service;
 
 import com.task2.carriergot2.model.Mediation_routing;
-import com.task2.carriergot2.model.Mediation_routing_child;
+//import com.task2.carriergot2.model.Mediation_routing_child;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -16,5 +16,5 @@ public interface iMediationService {
 
     public Mediation_routing DeleteId(BigInteger id) throws Exception;
 
-    public List<Mediation_routing_child> getChilds(BigInteger Id);
+    public List<Mediation_routing> getRevisionsById(BigInteger Id);
 }

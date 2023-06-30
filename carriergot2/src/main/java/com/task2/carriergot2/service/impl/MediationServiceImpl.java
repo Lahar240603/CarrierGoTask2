@@ -1,10 +1,13 @@
 package com.task2.carriergot2.service.impl;
 
 import com.task2.carriergot2.model.Mediation_routing;
-import com.task2.carriergot2.model.Mediation_routing_child;
+//import com.task2.carriergot2.model.Mediation_routing_child;
 import com.task2.carriergot2.repository.Mediation_Repository;
-import com.task2.carriergot2.repository.Mediation_Repository_child;
+//import com.task2.carriergot2.repository.Mediation_Repository_child;
 import com.task2.carriergot2.service.iMediationService;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,7 +26,10 @@ public class MediationServiceImpl implements iMediationService {
     private Mediation_Repository routerRepository;
 
     @Autowired
-    private Mediation_Repository_child childRepository;
+    private AuditReader auditReader;
+
+//    @Autowired
+//    private Mediation_Repository_child childRepository;
 
     @Override
     public List<Mediation_routing> getAllIds(){
@@ -58,16 +64,17 @@ public class MediationServiceImpl implements iMediationService {
 //        Mediation_routing_child child_obj = new Mediation_routing_child();
         try{
             Mediation_routing obj = routerRepository.findById(instance.getId()).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
-            Mediation_routing_child child_obj = new Mediation_routing_child();
+//            Mediation_routing_child child_obj = new Mediation_routing_child();
 //            obj = routerRepository.findById(instance.getId()).orElse(null);
-            child_obj.setKey_id(obj.getKey_id());
-            child_obj.setValue(obj.getValue());
-            child_obj.setVersion(obj.getVersion());
-            child_obj.setCreatedBy(obj.getCreatedBy());
-            child_obj.setCreatedDateTime(obj.getCreatedDateTime());
-            child_obj.setUpdatedBy(obj.getUpdatedBy());
-            child_obj.setUpdatedDateTime(obj.getUpdatedDateTime());
-            child_obj.setMediationRouting(obj);
+//            child_obj.setKey_id(obj.getKey_id());
+//            child_obj.setValue(obj.getValue());
+//            child_obj.setVersion(obj.getVersion());
+//            child_obj.setCreatedBy(obj.getCreatedBy());
+//            child_obj.setCreatedDateTime(obj.getCreatedDateTime());
+//            child_obj.setUpdatedBy(obj.getUpdatedBy());
+//            child_obj.setUpdatedDateTime(obj.getUpdatedDateTime());
+//            child_obj.setMediationRouting(obj);
+
 //            if(Objects.equals(obj.getKey_id(), instance.getKey_id()) && Objects.equals(obj.getValue(), instance.getValue())){
 //                obj.setId(instance.getId());
 //                obj.setKey_id(instance.getKey_id());
@@ -84,7 +91,7 @@ public class MediationServiceImpl implements iMediationService {
             obj.setVersion(ans);
             obj.setUpdatedBy(username);
             obj.setUpdatedDateTime(LocalDateTime.now());
-            childRepository.save(child_obj);
+//            childRepository.save(child_obj);
             return routerRepository.save(obj);
             //}
         }
@@ -116,10 +123,20 @@ public class MediationServiceImpl implements iMediationService {
     }
 
     @Override
-    public List<Mediation_routing_child> getChilds(BigInteger Id){
-//        Parent obj = new Parent();
-//        Parent obj = routerRepository.findById(Id).orElse(null);
-        Mediation_routing obj = routerRepository.findById(Id).get();
-        return (List<Mediation_routing_child>) obj.getChilds();
+    public List<Mediation_routing> getRevisionsById(BigInteger Id){
+        AuditQuery auditQuery = auditReader.createQuery()
+                .forRevisionsOfEntity(Mediation_routing.class, true, true)
+                .add(AuditEntity.id().eq(Id));
+
+        List<Mediation_routing> auditRevisions = auditQuery.getResultList();
+        return auditRevisions;
     }
+
+//    @Override
+//    public List<Mediation_routing_child> getChilds(BigInteger Id){
+////        Parent obj = new Parent();
+////        Parent obj = routerRepository.findById(Id).orElse(null);
+//        Mediation_routing obj = routerRepository.findById(Id).get();
+//        return (List<Mediation_routing_child>) obj.getChilds();
+//    }
 }
