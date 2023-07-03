@@ -6,6 +6,9 @@ import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 import com.task2.carriergot2.service.iAmendServiceGetOrg;
 import com.task2.carriergot2.service.iUpdateServiceGetOrg;
 import com.task2.carriergot2.utils.WorkOrderStateDeciderRequest;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
@@ -20,6 +23,9 @@ public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg
 
     @Autowired
     private iUpdateServiceGetOrg updatedService;
+
+    @Autowired
+    private AuditReader auditReader;
 
 
     @Override
@@ -40,5 +46,22 @@ public class WorkOrderStateDeciderGetOrg implements iWorkOrderStateDeciderGetOrg
     public List<String> findAllOrgCodes(String token) {
         return amendedService.findAllOrgCodes(token);
     }
+
+    @Override
+    public List<?> getUpdateAudit(Long id) {
+        return auditReader.createQuery()
+                .forRevisionsOfEntity(UpdateWorkOrderStateDecider.class, true, true)
+                .add(AuditEntity.id().eq(id))
+                .getResultList();
+    }
+
+    @Override
+    public List<?> getAmendAudit(Long id) {
+        return auditReader.createQuery()
+                .forRevisionsOfEntity(AmendWorkOrderStateDecider.class, true, true)
+                .add(AuditEntity.id().eq(id))
+                .getResultList();
+    }
+
 
 }

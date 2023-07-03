@@ -1,5 +1,7 @@
 package com.task2.carriergot2.controller;
 
+import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
+import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
 import com.task2.carriergot2.service.iWorkOrderStateDeciderGetOrg;
 import com.task2.carriergot2.service.impl.WorkOrderStateDeciderGetOrg;
 import com.task2.carriergot2.utils.WorkOrderStateDeciderRequest;
@@ -31,4 +33,13 @@ public class ControllerGetOrg {
         return service.getOrgRequest(orgCode);
     }
 
+    @GetMapping("/update/audit/{id}")
+    public List<?> getUpdateAudit(@PathVariable("id") Long id) {
+        return service.getUpdateAudit(id);
+    }
+
+    @GetMapping("/amend/audit/{id}")
+    public List<?> getAmendAudit(@PathVariable("id") Long id) {
+        return service.getAmendAudit(id);
+    }
 }
