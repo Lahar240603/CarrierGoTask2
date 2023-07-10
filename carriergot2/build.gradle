@@ -18,6 +18,8 @@ dependencies {
 	implementation 'org.hibernate:hibernate-envers:5.6.15.Final'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.18'
 }
 
 tasks.named('test') {
