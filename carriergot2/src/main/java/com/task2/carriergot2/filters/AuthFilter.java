@@ -2,6 +2,7 @@ package com.task2.carriergot2.filters;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -79,7 +80,7 @@ public class AuthFilter implements Filter
             try {
                 JsonNode jsonNode = new ObjectMapper().readTree(result);
                 String name = jsonNode.get("firstName").asText() + " " + jsonNode.get("lastName").asText();
-                request.setAttribute("username", name);
+                MDC.put("userName", name);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -2,7 +2,6 @@ package com.task2.carriergot2.controllers;
 import com.task2.carriergot2.entities.MediationRouting;
 import com.task2.carriergot2.services.IMediationRoutingService;
 //import io.swagger.annotations.ApiOperation;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +15,6 @@ import java.util.List;
 @RequestMapping("/mediation-routing")
 public class MediationRoutingController {
 
-    public static final String USER_NAME = "userName";
-
     @Autowired
     private IMediationRoutingService mediationRoutingService;
 
@@ -30,16 +27,14 @@ public class MediationRoutingController {
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ApiOperation(value = "Add new routing mediation entry", produces = "application/json")
     public ResponseEntity<MediationRouting> addNewRoutingMediation(@RequestBody MediationRouting inputMediationRouting, HttpServletRequest request) {
-        inputMediationRouting.setLastModifiedBy(MDC.get(USER_NAME));
-        MediationRouting mediationRouting = mediationRoutingService.addNewRoutingMediation(inputMediationRouting, MDC.get(USER_NAME));
+        MediationRouting mediationRouting = mediationRoutingService.addNewRoutingMediation(inputMediationRouting);
         return new ResponseEntity<MediationRouting>(mediationRouting, HttpStatus.OK);
     }
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ApiOperation(value = "Update the routing mediation entry", produces = "application/json")
     public ResponseEntity<MediationRouting> updateMediationRouting(@RequestBody MediationRouting inputMediationRouting, HttpServletRequest request) {
-        inputMediationRouting.setLastModifiedBy(MDC.get(USER_NAME));
-        MediationRouting mediationRouting = mediationRoutingService.updateMediationRouting(inputMediationRouting, MDC.get(USER_NAME));
+        MediationRouting mediationRouting = mediationRoutingService.updateMediationRouting(inputMediationRouting);
         return new ResponseEntity<MediationRouting>(mediationRouting, HttpStatus.OK);
     }
 

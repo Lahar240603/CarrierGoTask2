@@ -9,7 +9,7 @@ import com.task2.carriergot2.services.ICommonService;
 import com.task2.carriergot2.services.IDeciderConfigurationService;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.query.AuditEntity;
-import org.slf4j.MDC;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,8 +81,7 @@ public class DeciderConfigurationService implements IDeciderConfigurationService
         List<AmendDecider> amendDeciderList = new ArrayList<>();
         orgCodes.forEach(code -> {
             AmendDecider amendDeciderToSave = new AmendDecider();
-            amendDeciderToSave = amendDecider;
-            amendDeciderToSave.setCreatedBy(MDC.get(USER_NAME));
+            BeanUtils.copyProperties(amendDecider, amendDeciderToSave);
             amendDeciderToSave.setOrgCode(code);
             amendDeciderList.add(amendDeciderToSave);
         });
@@ -93,8 +92,7 @@ public class DeciderConfigurationService implements IDeciderConfigurationService
         List<UpdateDecider> updateDeciderList = new ArrayList<>();
         orgCodes.forEach(code -> {
             UpdateDecider updateDeciderToSave = new UpdateDecider();
-            updateDeciderToSave = updateDecider;
-            updateDeciderToSave.setCreatedBy(MDC.get(USER_NAME));
+            BeanUtils.copyProperties(updateDecider, updateDeciderToSave);
             updateDeciderToSave.setOrgCode(code);
             updateDeciderList.add(updateDeciderToSave);
         });

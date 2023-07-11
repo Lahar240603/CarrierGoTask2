@@ -3,7 +3,6 @@ import com.task2.carriergot2.dto.DeciderConfigurationAddElementRequest;
 import com.task2.carriergot2.dto.DeciderConfigurationDTO;
 import com.task2.carriergot2.services.IDeciderConfigurationService;
 
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,30 +30,16 @@ public class DeciderConfigurationController {
 
     @PutMapping("/addconfiguration")
     public DeciderConfigurationDTO addConfiguration(@RequestBody DeciderConfigurationDTO deciderConfigurationDTO, HttpServletRequest request) {
-        deciderConfigurationDTO.getAmendList().forEach(configuration ->{
-            configuration.setCreatedBy(MDC.get(USER_NAME));
-        });
-        deciderConfigurationDTO.getUpdateList().forEach(configuration ->{
-            configuration.setCreatedBy(MDC.get(USER_NAME));
-        });
         return iDeciderConfigurationService.addConfiguration(deciderConfigurationDTO);
     }
 
     @PutMapping("/update/{orgCode}")
     public DeciderConfigurationDTO updateDeciderConfiguration(@RequestBody DeciderConfigurationDTO deciderConfigurationDTO, HttpServletRequest request) {
-        deciderConfigurationDTO.getAmendList().forEach(configuration ->{
-            configuration.setLastModifiedBy(MDC.get(USER_NAME));
-        });
-        deciderConfigurationDTO.getUpdateList().forEach(configuration ->{
-            configuration.setLastModifiedBy(MDC.get(USER_NAME));
-        });
         return iDeciderConfigurationService.addConfiguration(deciderConfigurationDTO);
     }
 
     @PutMapping("/add-element")
     public DeciderConfigurationDTO addElement(@RequestBody DeciderConfigurationAddElementRequest deciderConfigurationAddElementRequest, HttpServletRequest request) {
-        deciderConfigurationAddElementRequest.getAmendDecider().setCreatedBy(MDC.get(USER_NAME));
-        deciderConfigurationAddElementRequest.getUpdateDecider().setCreatedBy(MDC.get(USER_NAME));
         return iDeciderConfigurationService.addElement(deciderConfigurationAddElementRequest.getAmendDecider(), deciderConfigurationAddElementRequest.getUpdateDecider());
     }
 }

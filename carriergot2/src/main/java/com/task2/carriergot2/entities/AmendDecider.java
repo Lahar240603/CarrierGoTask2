@@ -5,6 +5,7 @@ import com.task2.carriergot2.enums.converters.AmendDeciderEnumConverter;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
+import org.slf4j.MDC;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -80,5 +81,17 @@ public class AmendDecider {
     @Column(name = "LASTMODIFIED")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime lastModified;
+
+    @PrePersist
+    public void onPrePersist() {
+        setCreatedBy(MDC.get("userName"));
+        setCreationTime(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        setLastModifiedBy(MDC.get("userName"));
+        setLastModified(LocalDateTime.now());
+    }
 
 }

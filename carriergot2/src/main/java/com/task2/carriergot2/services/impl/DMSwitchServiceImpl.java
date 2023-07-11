@@ -32,6 +32,7 @@ public class DMSwitchServiceImpl implements IDMSwitchService {
     public DMSwitch updateSwitch(DMSwitch dmSwitch) {
         Optional<DMSwitch> existingSwitch = dmSwitchRepository.findById(dmSwitch.getId());
         if (existingSwitch.isPresent()) {
+            existingSwitch.get().setEnabled(dmSwitch.isEnabled());
             return dmSwitchRepository.save(existingSwitch.get());
         }
         return null;

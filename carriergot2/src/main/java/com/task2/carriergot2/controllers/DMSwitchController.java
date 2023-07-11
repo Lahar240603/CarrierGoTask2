@@ -3,7 +3,6 @@ import com.task2.carriergot2.entities.DMSwitch;
 import com.task2.carriergot2.services.IDMSwitchService;
 //import io.swagger.annotations.ApiOperation;
 
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +30,6 @@ public class DMSwitchController {
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ApiOperation(value = "Add new DM Switch", produces = "application/json")
     public ResponseEntity<DMSwitch> addNewDMSwitch(@RequestBody DMSwitch inputDMSwitch, HttpServletRequest request) {
-        inputDMSwitch.setLastModifiedBy(MDC.get(USER_NAME));
         DMSwitch dmSwitch = dmSwitchService.addNewDMSwitch(inputDMSwitch);
         return new ResponseEntity<DMSwitch>(dmSwitch, HttpStatus.OK);
     }

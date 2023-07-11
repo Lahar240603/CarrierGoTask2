@@ -2,6 +2,8 @@ package com.task2.carriergot2.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
+import org.slf4j.MDC;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name="dmswitches")
 @Getter
 @Setter
+@Audited
 public class DMSwitch {
 
     @Id
@@ -37,6 +40,18 @@ public class DMSwitch {
     @Column(name = "LASTMODIFIED")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime lastModified;
+
+    @PrePersist
+    public void onPrePersist() {
+        setCreatedBy(MDC.get("userName"));
+        setCreationTime(LocalDateTime.now());
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        setLastModifiedBy(MDC.get("userName"));
+        setLastModified(LocalDateTime.now());
+    }
 
 }
 

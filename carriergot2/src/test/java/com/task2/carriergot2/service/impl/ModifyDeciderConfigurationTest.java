@@ -1,13 +1,14 @@
 package com.task2.carriergot2.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.task2.carriergot2.enums.AmendWorkOrderStateDeciderEnum;
-import com.task2.carriergot2.enums.UpdateWorkOrderStateDeciderEnum;
-import com.task2.carriergot2.model.AmendWorkOrderStateDecider;
-import com.task2.carriergot2.model.UpdateWorkOrderStateDecider;
-import com.task2.carriergot2.repository.AmendRepository;
-import com.task2.carriergot2.repository.UpdateRepository;
-import com.task2.carriergot2.utils.WorkOrderStateDeciderRequest;
+import com.task2.carriergot2.dto.DeciderConfigurationDTO;
+import com.task2.carriergot2.entities.AmendDecider;
+import com.task2.carriergot2.entities.UpdateDecider;
+import com.task2.carriergot2.enums.AmendDeciderEnum;
+import com.task2.carriergot2.enums.UpdateDeciderEnum;
+import com.task2.carriergot2.repositories.AmendDeciderRepository;
+import com.task2.carriergot2.repositories.UpdateDeciderRepository;
+import com.task2.carriergot2.services.IDeciderConfigurationService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +43,13 @@ public class ModifyDeciderConfigurationTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private UpdateRepository updateRepository;
+    private UpdateDeciderRepository updateDeciderRepository;
 
     @Autowired
-    private AmendRepository amendRepository;
+    private AmendDeciderRepository amendDeciderRepository;
 
     @Autowired
-    private WorkOrderStateDeciderGetOrg workOrderStateDeciderGetOrg;
+    private IDeciderConfigurationService deciderConfigurationService;
 
     private static HttpHeaders headers;
 
@@ -60,48 +61,46 @@ public class ModifyDeciderConfigurationTest {
     }
 
     private String createURLWithPort() {
-        return "http://localhost:" + port + "/workorderstate/update/ZZZZ";
+        return "http://localhost:" + port + "/decider-configuration/update/ZZZZ";
     }
 
 
     @Test
     public void UpdateEndpointTest() throws Exception{
 //        Setting up the Changes.
-        UpdateWorkOrderStateDecider updateWorkOrderStateDecider = new UpdateWorkOrderStateDecider();
-        updateWorkOrderStateDecider.setDbId(1L);
-        updateWorkOrderStateDecider.setAccepted(UpdateWorkOrderStateDeciderEnum.getEnum("O"));
-        List<UpdateWorkOrderStateDecider> updateList = new ArrayList<>();
+        UpdateDecider updateWorkOrderStateDecider = updateDeciderRepository.findAllByOrgCode("ZZZZ").get(0);
+        updateWorkOrderStateDecider.setAccepted(UpdateDeciderEnum.getEnum("O"));
+        List<UpdateDecider> updateList = new ArrayList<>();
         updateList.add(updateWorkOrderStateDecider);
 
-        AmendWorkOrderStateDecider amendWorkOrderStateDecider = new AmendWorkOrderStateDecider();
-        amendWorkOrderStateDecider.setDbId(1L);
-        amendWorkOrderStateDecider.setAccepted(AmendWorkOrderStateDeciderEnum.getEnum("R"));
-        List<AmendWorkOrderStateDecider> amendList = new ArrayList<>();
+        AmendDecider amendWorkOrderStateDecider = amendDeciderRepository.findAllByOrgCode("ZZZZ").get(0);
+        amendWorkOrderStateDecider.setAccepted(AmendDeciderEnum.getEnum("R"));
+        List<AmendDecider> amendList = new ArrayList<>();
         amendList.add(amendWorkOrderStateDecider);
 
-        WorkOrderStateDeciderRequest workOrderStateDeciderRequest = new WorkOrderStateDeciderRequest(amendList, updateList);
+        DeciderConfigurationDTO workOrderStateDeciderRequest = new DeciderConfigurationDTO(amendList, updateList);
 
 //        Storing old values.
-        List<UpdateWorkOrderStateDecider> oldUpdateList = updateRepository.findAll();
-        List<AmendWorkOrderStateDecider> oldAmendList = amendRepository.findAll();
+//        List<UpdateDecider> oldUpdateList = updateDeciderRepository.findAll();
+//        List<AmendDecider> oldAmendList = amendDeciderRepository.findAll();
 
 
 //        Making the Call through the controller.
         HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(workOrderStateDeciderRequest), headers);
-        ResponseEntity<WorkOrderStateDeciderRequest> response = restTemplate.exchange(
-                createURLWithPort(), HttpMethod.PUT, entity, WorkOrderStateDeciderRequest.class);
+        ResponseEntity<DeciderConfigurationDTO> response = restTemplate.exchange(
+                createURLWithPort(), HttpMethod.PUT, entity, DeciderConfigurationDTO.class);
 
 //        Checking the Response.
-        List<UpdateWorkOrderStateDecider> updatedList = Objects.requireNonNull(response.getBody()).getUpdateList();
-        List<AmendWorkOrderStateDecider> amendedList = Objects.requireNonNull(response.getBody()).getAmendList();
+        List<UpdateDecider> updatedList = Objects.requireNonNull(response.getBody()).getUpdateList();
+        List<AmendDecider> amendedList = Objects.requireNonNull(response.getBody()).getAmendList();
         System.out.println(response.getStatusCode());
         assert response.getStatusCode().equals(HttpStatus.OK);
         assert updatedList != null;
         assert amendedList != null;
-        assert updatedList.get(0).getAccepted().equals(UpdateWorkOrderStateDeciderEnum.getEnum("O"));
-        assert updatedList.get(0).getUpdatedBy().equals("Speedy Jodie");
-        assert amendedList.get(0).getAccepted().equals(AmendWorkOrderStateDeciderEnum.getEnum("R"));
-        assert amendedList.get(0).getUpdatedBy().equals("Speedy Jodie");
+        assert updatedList.get(0).getAccepted().equals(UpdateDeciderEnum.getEnum("O"));
+        assert updatedList.get(0).getLastModifiedBy().equals("Speedy Jodie");
+        assert amendedList.get(0).getAccepted().equals(AmendDeciderEnum.getEnum("R"));
+        assert amendedList.get(0).getLastModifiedBy().equals("Speedy Jodie");
 
     }
 }

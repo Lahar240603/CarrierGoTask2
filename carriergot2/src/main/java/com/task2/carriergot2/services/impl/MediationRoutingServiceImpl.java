@@ -29,16 +29,17 @@ public class MediationRoutingServiceImpl implements IMediationRoutingService{
     }
 
     @Override
-    public MediationRouting addNewRoutingMediation(MediationRouting mediationRouting, String username) {
+    public MediationRouting addNewRoutingMediation(MediationRouting mediationRouting) {
         return mediationRoutingRepository.save(mediationRouting);
     }
 
     @Override
-    public MediationRouting updateMediationRouting(MediationRouting mediationRouting, String username) {
+    public MediationRouting updateMediationRouting(MediationRouting mediationRouting) {
         MediationRouting existingMediationRouting = mediationRoutingRepository.findById(mediationRouting.getId()).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
         existingMediationRouting.setValue(mediationRouting.getValue());
         existingMediationRouting.setVersion(mediationRouting.getVersion() + 1);
-        existingMediationRouting.setLastModified(LocalDateTime.now());
+        existingMediationRouting.setLastModifiedBy(mediationRouting.getLastModifiedBy());
+//        existingMediationRouting.setLastModified(LocalDateTime.now());
         return mediationRoutingRepository.save(existingMediationRouting);
     }
 

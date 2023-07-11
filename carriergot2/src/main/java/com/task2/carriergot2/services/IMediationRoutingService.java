@@ -8,9 +8,9 @@ public interface IMediationRoutingService {
 
     public List<MediationRouting> getAllMediationRoutings();
 
-    public MediationRouting addNewRoutingMediation(MediationRouting instance, String username);
+    public MediationRouting addNewRoutingMediation(MediationRouting instance);
 
-    public MediationRouting updateMediationRouting(MediationRouting instance, String username);
+    public MediationRouting updateMediationRouting(MediationRouting instance);
 
 
     List<MediationRouting> getAuditById(Long Id);
