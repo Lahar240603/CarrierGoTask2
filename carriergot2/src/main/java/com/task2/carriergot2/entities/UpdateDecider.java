@@ -2,9 +2,7 @@ package com.task2.carriergot2.entities;
 
 import com.task2.carriergot2.enums.UpdateDeciderEnum;
 import com.task2.carriergot2.enums.converters.UpdateDeciderEnumConverter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.envers.Audited;
 import org.slf4j.MDC;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +15,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "updateworkorderstatedecider")
 public class UpdateDecider {
     @Id

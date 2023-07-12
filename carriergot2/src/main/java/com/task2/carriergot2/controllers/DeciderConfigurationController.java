@@ -1,6 +1,8 @@
 package com.task2.carriergot2.controllers;
 import com.task2.carriergot2.dto.DeciderConfigurationAddElementRequest;
+import com.task2.carriergot2.dto.DeciderConfigurationCreateDTO;
 import com.task2.carriergot2.dto.DeciderConfigurationDTO;
+import com.task2.carriergot2.dto.DeciderConfigurationModifyDTO;
 import com.task2.carriergot2.services.IDeciderConfigurationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +31,14 @@ public class DeciderConfigurationController {
     }
 
     @PutMapping("/addconfiguration")
-    public DeciderConfigurationDTO addConfiguration(@RequestBody DeciderConfigurationDTO deciderConfigurationDTO, HttpServletRequest request) {
-        return iDeciderConfigurationService.addConfiguration(deciderConfigurationDTO);
+    public DeciderConfigurationDTO addConfiguration(@RequestBody DeciderConfigurationCreateDTO deciderConfigurationCreateDTO, HttpServletRequest request) {
+        return iDeciderConfigurationService.addConfiguration(deciderConfigurationCreateDTO);
     }
 
     @PutMapping("/update/{orgCode}")
-    public DeciderConfigurationDTO updateDeciderConfiguration(@RequestBody DeciderConfigurationDTO deciderConfigurationDTO, HttpServletRequest request) {
-        return iDeciderConfigurationService.addConfiguration(deciderConfigurationDTO);
+    public DeciderConfigurationDTO updateDeciderConfiguration(@RequestBody DeciderConfigurationModifyDTO deciderConfigurationModifyDTO, HttpServletRequest request) {
+
+        return iDeciderConfigurationService.modifyConfiguration(deciderConfigurationModifyDTO);
     }
 
     @PutMapping("/add-element")

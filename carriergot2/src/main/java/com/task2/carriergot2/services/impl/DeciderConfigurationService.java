@@ -1,6 +1,6 @@
 package com.task2.carriergot2.services.impl;
 
-import com.task2.carriergot2.dto.DeciderConfigurationDTO;
+import com.task2.carriergot2.dto.*;
 import com.task2.carriergot2.entities.AmendDecider;
 import com.task2.carriergot2.entities.UpdateDecider;
 import com.task2.carriergot2.repositories.AmendDeciderRepository;
@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,12 +61,13 @@ public class DeciderConfigurationService implements IDeciderConfigurationService
 
     @Override
     @Transactional
-    public DeciderConfigurationDTO addConfiguration(DeciderConfigurationDTO deciderConfigurationDTO) {
-        List<UpdateDecider> updateDeciderList = updateDeciderRepository.saveAll(deciderConfigurationDTO.getUpdateList());
-        List<AmendDecider> amendDeciderList = amendDeciderRepository.saveAll(deciderConfigurationDTO.getAmendList());
+    public DeciderConfigurationDTO addConfiguration(DeciderConfigurationCreateDTO deciderConfigurationCreateDTO) {
+        DeciderConfigurationDTO deciderConfigurationRequestDTO = deciderConfigurationCreateDTO.buildEntity();
+        List<UpdateDecider> updateDeciderList = updateDeciderRepository.saveAll(deciderConfigurationRequestDTO.getUpdateList());
+        List<AmendDecider> amendDeciderList = amendDeciderRepository.saveAll(deciderConfigurationRequestDTO.getAmendList());
         Collections.sort(updateDeciderList, (o1, o2) -> o1.getElementName().compareTo(o2.getElementName()));
         Collections.sort(amendDeciderList, (o1, o2) -> o1.getElementName().compareTo(o2.getElementName()));
-        return new DeciderConfigurationDTO(amendDeciderList, updateDeciderList);
+        return new DeciderConfigurationDTO(amendDeciderList,updateDeciderList);
     }
 
     @Override
@@ -75,6 +77,21 @@ public class DeciderConfigurationService implements IDeciderConfigurationService
         List<UpdateDecider> updateDeciderList = constructUpdateDeciders(updateDecider, orgCodes);
         List<AmendDecider> amendDeciderList = constructAmendDeciders(amendDecider, orgCodes);
         return new DeciderConfigurationDTO(amendDeciderRepository.saveAll(amendDeciderList), updateDeciderRepository.saveAll(updateDeciderList));
+    }
+
+    @Override
+    public DeciderConfigurationDTO modifyConfiguration(DeciderConfigurationModifyDTO request) {
+        List<AmendDecider> modifiedAmendDeciderList = new ArrayList<>();
+        for(AmendDeciderModifyDTO amendDeciderModifyDTO : request.getAmendList()) {
+            Optional<AmendDecider> amendDecider = amendDeciderRepository.findByDbId(amendDeciderModifyDTO.getDbId());
+            amendDecider.ifPresent(decider -> modifiedAmendDeciderList.add(amendDeciderModifyDTO.buildEntity(decider)));
+        }
+        List<UpdateDecider> modifiedUpdateDeciderList = new ArrayList<>();
+        for(UpdateDeciderModifyDTO updateDeciderModifyDTO : request.getUpdateList()) {
+            Optional<UpdateDecider> updateDecider = updateDeciderRepository.findByDbId(updateDeciderModifyDTO.getDbId());
+            updateDecider.ifPresent(decider -> modifiedUpdateDeciderList.add(updateDeciderModifyDTO.buildEntity(decider)));
+        }
+        return new DeciderConfigurationDTO(amendDeciderRepository.saveAll(modifiedAmendDeciderList), updateDeciderRepository.saveAll(modifiedUpdateDeciderList));
     }
 
     private List<AmendDecider> constructAmendDeciders(AmendDecider amendDecider, List<String> orgCodes) {
