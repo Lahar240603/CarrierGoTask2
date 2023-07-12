@@ -41,6 +41,13 @@ public class DMSwitchController {
         return new ResponseEntity<>(updatedSwitch, HttpStatus.OK);
     }
 
+    @GetMapping("/audit/{id}")
+//    @ApiOperation(value = "Get audit of the DM Switch by Id", produces = "application/json")
+    public ResponseEntity<List<DMSwitch>> getAuditBySwitchName(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(dmSwitchService.getAuditById(id), HttpStatus.OK);
+
+    }
+
 }
 
 

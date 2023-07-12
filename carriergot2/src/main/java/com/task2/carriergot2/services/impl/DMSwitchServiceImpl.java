@@ -5,6 +5,9 @@ package com.task2.carriergot2.services.impl;
 import com.task2.carriergot2.entities.DMSwitch;
 import com.task2.carriergot2.repositories.DMSwitchRepository;
 import com.task2.carriergot2.services.IDMSwitchService;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,9 @@ public class DMSwitchServiceImpl implements IDMSwitchService {
 
     @Autowired
     private DMSwitchRepository dmSwitchRepository;
+
+    @Autowired
+    private AuditReader auditReader;
 
     @Override
     public List<DMSwitch> getAllDMSwitches() {
@@ -36,6 +42,14 @@ public class DMSwitchServiceImpl implements IDMSwitchService {
             return dmSwitchRepository.save(existingSwitch.get());
         }
         return null;
+    }
+
+    @Override
+    public List<DMSwitch> getAuditById(Long Id) {
+        AuditQuery auditQuery = auditReader.createQuery()
+                .forRevisionsOfEntity(DMSwitch.class, true, true)
+                .add(AuditEntity.id().eq(Id));
+        return auditQuery.getResultList();
     }
 
 }

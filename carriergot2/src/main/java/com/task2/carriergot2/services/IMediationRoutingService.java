@@ -12,6 +12,5 @@ public interface IMediationRoutingService {
 
     public MediationRouting updateMediationRouting(MediationRouting instance);
 
-
     List<MediationRouting> getAuditById(Long Id);
 }

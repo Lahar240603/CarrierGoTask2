@@ -11,4 +11,6 @@ public interface IDMSwitchService {
     DMSwitch addNewDMSwitch(DMSwitch inputDMSwitch);
 
     DMSwitch updateSwitch(DMSwitch updatedSwitch);
+
+    List<DMSwitch> getAuditById(Long id);
 }
