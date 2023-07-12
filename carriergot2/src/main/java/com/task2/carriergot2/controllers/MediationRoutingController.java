@@ -1,4 +1,5 @@
 package com.task2.carriergot2.controllers;
+import com.task2.carriergot2.dto.MediationRoutingDTO;
 import com.task2.carriergot2.entities.MediationRouting;
 import com.task2.carriergot2.services.IMediationRoutingService;
 //import io.swagger.annotations.ApiOperation;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -26,16 +26,18 @@ public class MediationRoutingController {
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ApiOperation(value = "Add new routing mediation entry", produces = "application/json")
-    public ResponseEntity<MediationRouting> addNewRoutingMediation(@RequestBody MediationRouting inputMediationRouting, HttpServletRequest request) {
+    public ResponseEntity<MediationRouting> addNewRoutingMediation(@RequestBody MediationRoutingDTO inputMediationRouting, HttpServletRequest request) {
         MediationRouting mediationRouting = mediationRoutingService.addNewRoutingMediation(inputMediationRouting);
         return new ResponseEntity<MediationRouting>(mediationRouting, HttpStatus.OK);
     }
 
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ApiOperation(value = "Update the routing mediation entry", produces = "application/json")
-    public ResponseEntity<MediationRouting> updateMediationRouting(@RequestBody MediationRouting inputMediationRouting, HttpServletRequest request) {
+    public ResponseEntity<MediationRouting> updateMediationRouting(@RequestBody MediationRoutingDTO inputMediationRouting, HttpServletRequest request) {
         MediationRouting mediationRouting = mediationRoutingService.updateMediationRouting(inputMediationRouting);
         return new ResponseEntity<MediationRouting>(mediationRouting, HttpStatus.OK);
+//        System.out.println("Inside");
+//        return new ResponseEntity<MediationRouting>((MediationRouting) null, HttpStatus.OK);
     }
 
     @GetMapping("/audit/{id}")

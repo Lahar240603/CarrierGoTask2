@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MediationRoutingRepository extends JpaRepository<MediationRouting, Long> {
+    MediationRouting findByKeyId(String KeyId);
 }

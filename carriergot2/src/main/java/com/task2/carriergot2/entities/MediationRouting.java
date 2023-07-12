@@ -1,7 +1,6 @@
 package com.task2.carriergot2.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.envers.Audited;
 import org.slf4j.MDC;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +13,9 @@ import java.time.LocalDateTime;
 @Table(name = "mediation_routing")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MediationRouting {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

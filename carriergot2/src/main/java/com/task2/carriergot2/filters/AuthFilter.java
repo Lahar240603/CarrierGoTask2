@@ -42,7 +42,7 @@ public class AuthFilter implements Filter
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
+//        System.out.println(request.getMethod());
         if(request.getMethod().equals("OPTIONS")){
             String origin = request.getHeader("Origin");
             if (origin != null && ALLOWED_ORIGINS.contains(origin)) {
@@ -69,7 +69,9 @@ public class AuthFilter implements Filter
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> entity = new HttpEntity<String>(req, headers);
             String result = null;
-            try {result = temp.postForObject(uri, entity, String.class);}
+            try {
+                result = temp.postForObject(uri, entity, String.class);
+            }
             catch (Exception e) {
                 e.printStackTrace();
                 response.setStatus(401);
@@ -84,7 +86,6 @@ public class AuthFilter implements Filter
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             chain.doFilter(request, response);
         }
 
